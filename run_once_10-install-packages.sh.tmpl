@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+white=$'\e[0;97m'
+endc=$'\e[0m'
+
+bye() {
+  echo ""
+  echo "$cyan-->$white End for $0 $endc"
+  echo "$cyan--------------------------------------------------$endc"
+}
+
+if hash pacman 2>/dev/null ; then
+
+  . {{ .chezmoi.sourceDir }}/scripts/archlinux.sh $args
+
+elif hash apt-get 2>/dev/null ; then
+
+  sh {{ .chezmoi.sourceDir }}/scripts/debian.sh $args
+
+fi
+
+trap bye EXIT
