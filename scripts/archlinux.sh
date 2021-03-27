@@ -12,7 +12,7 @@ install() {
     # scrcpy for android app development :>
     # minecraft-server for :>
 
-  $ins zsh ttf-ms-fonts nerd-fonts-complete ibus-bamboo \
+  $ins zsh ttf-ms-fonts ibus-bamboo \
     chromium calibre picard qbittorrent discord \
     ffmpeg youtube-dl vlc xdman \
     git rar gitkraken \
