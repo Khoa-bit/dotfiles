@@ -11,12 +11,15 @@ apt_install() {
     # scrcpy for android app development :>
     # minecraft-server for :>
 
-  sudo $apt_ins zsh \
+  sudo $apt_ins zsh fzf autojump \
     net-tools dconf-editor gnome-tweaks chrome-gnome-shell
     calibre qbittorrent discord \
     ffmpeg youtube-dl vlc \
     git unrar gitkraken \
     code codium
+  
+  sudo apt install python3-dev python3-pip python3-setuptools
+  sudo pip3 install thefuck
 }
 
 ppa_install() {
