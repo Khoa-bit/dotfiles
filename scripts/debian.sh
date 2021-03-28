@@ -33,10 +33,9 @@ ppa_install() {
   gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
 }
 
+pkgs = "chromium"
+classic_pkgs = "intellij-idea-ultimate pycharm-professional"
 snap_install() {
-  pkgs = "chromium"
-  classic_pkgs = "intellij-idea-ultimate pycharm-professional"
-
   sudo $snap_ins $pkgs
   sudo $snap_ins --classic $classic_pkgs
 
