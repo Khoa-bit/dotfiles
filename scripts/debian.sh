@@ -14,7 +14,7 @@ apt_install() {
   sudo $apt_ins zsh fzf autojump \
     net-tools dconf-editor gnome-tweaks chrome-gnome-shell
     calibre qbittorrent discord \
-    ffmpeg youtube-dl vlc \
+    ffmpeg youtube-dl vlc exa \
     git unrar gitkraken \
     code codium
   

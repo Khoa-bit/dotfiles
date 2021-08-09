@@ -14,7 +14,7 @@ install() {
 
   $ins zsh ttf-ms-fonts ibus-bamboo \
     chromium calibre picard qbittorrent discord \
-    ffmpeg youtube-dl vlc xdman \
+    ffmpeg youtube-dl exa vlc xdman \
     oh-my-zsh-git autojump-git fzf thefuck tldr \
     git rar gitkraken \
     code vscodium-bin \
