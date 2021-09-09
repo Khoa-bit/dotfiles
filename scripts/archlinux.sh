@@ -17,7 +17,7 @@ install() {
     ffmpeg youtube-dl exa vlc xdman \
     oh-my-zsh-git autojump-git fzf thefuck tldr \
     git rar gitkraken \
-    code vscodium-bin \
+    gnome-keyring code vscodium-bin \
     intellij-idea-ultimate-edition pycharm-professional
 }
 
