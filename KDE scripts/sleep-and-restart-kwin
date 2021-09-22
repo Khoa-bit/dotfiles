@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 15
+sleep 22
 killall kwin_x11
 kwin_x11 --replace &
 
