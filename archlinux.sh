@@ -25,26 +25,26 @@ fi
 # install yay and devel
 pacmanIns="sudo pacman -S --noconfirm --needed base-devel wget yay"
 pacmanInstall() {
-    echo -e "${BLUE}<> Pacman Installing base-devel wget yay...\n${NC}"
+    echo -e "${BLUE}\n<> Pacman Installing base-devel wget yay...${NC}"
 
     $pacmanIns
 }
 
 yayUp="yay -Syu --noconfirm --needed"
 yayUpdate() {
-    echo -e "${BLUE}<> Yay Updating system...\n${NC}"
+    echo -e "${BLUE}\n<> Yay Updating system...${NC}"
 
     $yayUp
 }
 
 yayIns="yay -S --noconfirm --needed"
 yayInstall() {
-    echo -e "${BLUE}<> Yay Installing all packages...\n${NC}"
+    echo -e "${BLUE}\n<> Yay Installing all packages...${NC}"
 
     $yayIns zsh ttf-ms-fonts ibus-bamboo \
         chromium calibre picard qbittorrent discord \
         ffmpeg youtube-dl exa vlc xdman \
-        oh-my-zsh-git autojump-git fzf thefuck tldr \
+        oh-my-zsh-git fzf thefuck tldr \
         git rar snapd \
         gnome-keyring visual-studio-code-bin vscodium-bin \
         auto-cpufreq neofetch cpufetch-git cmatrix \
@@ -69,7 +69,7 @@ yayInstall() {
 
 snapIns="sudo snap install --no-wait"
 snapInstall() {
-    echo -e "${BLUE}<> Installing .fonts...\n${NC}"
+    echo -e "${BLUE}\n<> Installing .fonts...${NC}"
 
     $snapIns "--classic" "gitkraken"
     $snapIns "--classic" "pycharm-professional"
@@ -78,7 +78,7 @@ snapInstall() {
 }
 
 createSymlink() {
-    echo -e "${BLUE}<> Installing .fonts...\n${NC}"
+    echo -e "${BLUE}\n<> Installing .fonts...${NC}"
 
     ln -sf $HOME/.vscode $HOME/.vscode-os
     ln -sf $HOME/.config/Code/User $HOME/.config/VSCodium/User
@@ -90,7 +90,7 @@ yayInstall
 snapInstall
 createSymlink
 sh ./archExtract.sh
-# sh ./archCustomize.sh
+sh ./archCustomize.sh
 
 echo -e "${GREEN}\n======================= Manual Instructions =======================${BLUE}"
 echo -e '1. Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc.'
