@@ -13,7 +13,7 @@ cp -v --force -r $HOME/.fonts ./
 
 echo -e "${BLUE}<> Syncing .oh-my-zsh/custom...\n${NC}"
 cp -v --force -r $HOME/.oh-my-zsh/custom ./.oh-my-zsh/
-rm -r ./.oh-my-zsh/custom/themes/powerlevel10k
+rm -v -r ./.oh-my-zsh/custom/themes/powerlevel10k
 
 echo -e "${BLUE}<> Syncing .local/bin/*.sh...\n${NC}"
 cp -v --force $HOME/.local/bin/*.sh ./.local/bin
