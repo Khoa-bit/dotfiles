@@ -5,3 +5,4 @@
 	email = 55542012+Khoa-bit@users.noreply.github.com
 [core]
 	editor = code --wait
+	autocrlf = input

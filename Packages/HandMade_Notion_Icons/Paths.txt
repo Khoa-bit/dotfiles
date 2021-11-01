@@ -1,0 +1,9 @@
+ico + png:      /opt/Notion Enhanced/resources/app/
+png + tray.js:  /opt/Notion Enhanced/resources/app/embedded_enhancer/mods/core/icons/
+svg:            /home/galactyx/.local/share/icons/
+
+---------------------------
+tray.js
+line 54 + 55: (Under '/icons/mac+linux.png')
++    width: 21,
++    height: 21,
