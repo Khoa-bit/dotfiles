@@ -44,7 +44,7 @@ yayInstall() {
     $yayIns zsh ttf-ms-fonts ibus-bamboo \
         chromium calibre picard qbittorrent discord \
         ffmpeg youtube-dl exa vlc xdman \
-        oh-my-zsh-git fzf thefuck tldr \
+        oh-my-zsh-git fzf thefuck tldr bat ripgrep \
         git rar snapd \
         gnome-keyring visual-studio-code-bin vscodium-bin \
         auto-cpufreq neofetch cpufetch-git cmatrix \
@@ -113,7 +113,14 @@ echo -e '   d. Icons:               Reversal-blue + HandMade_Notion_Icons'
 echo -e '       - Follow Paths.txt instructions in ~/Packages/HandMade_Notion_Icons'
 echo -e '   e. Cursors:             BreezeX-Black'
 echo -e '   f. GitHub repos:        WhiteSur-kde, WhiteSur-icon-theme, McMojave-cursors, moe-theme'
-([ $# -eq 1 ] && [ $1 == 'X11' ]) && echo -e '5. Configure gestures Touche - Touchegg'
+echo -e '6. ZSH Plugins:'
+echo -e '   a. zsh-syntax-highlighting'
+echo -e '       $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting'
+echo -e '   b. zsh-autosuggestions'
+echo -e '       $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions'
+echo -e '   c. Update .zshrc'
+echo -e '       plugins=(git zsh-syntax-highlighting zsh-autosuggestions thefuck fzf)'
+([ $# -eq 1 ] && [ $1 == 'X11' ]) && echo -e '7. Configure gestures Touche - Touchegg'
 
 echo -e "${GREEN}\n========================== Not Installed ==========================${NC}"
 echo -e "${YELLOW}<> ttf-google-fonts-git, ttf-mac-fonts    for additional fonts${NC}"

@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions thefuck fzf)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zoxide thefuck fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,3 +126,6 @@ unset __conda_setup
 conda deactivate
 # <<< conda initialize <<<
 
+# >>> man initialize >>>
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# <<< man initialize <<<
