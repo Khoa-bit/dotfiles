@@ -7,3 +7,4 @@ alias activate-conda="source /opt/anaconda/bin/activate root"
 alias deactivate-conda="conda deactivate"
 alias cat='bat'
 alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias zspotify='python ~/Packages/zspotify/zspotify --skip-existing-files True --skip-previously-downloaded True'
