@@ -1,0 +1,4 @@
+channels:
+  - conda-forge
+  - https://conda.anaconda.org/gurobi
+auto_activate_base: false
