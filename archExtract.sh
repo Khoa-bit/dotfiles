@@ -8,7 +8,11 @@ NC='\033[0m' # No Color
 set -o errexit -o nounset
 
 echo -e "${BLUE}\n<> Extracting .zshrc, .p10k.zsh, .gitconfig...${NC}"
-cp -v --interactive ./backup/.zshrc ./backup/.p10k.zsh ./backup/.gitconfig $HOME
+cp -v $HOME/.zshrc $HOME/.zshrc.old
+cp -v $HOME/.p10k.zsh $HOME/.p10k.zsh.old
+cp -v $HOME/.gitconfig $HOME/.gitconfig.old
+cp -v $HOME/.condarc $HOME/.condarc.old
+cp -v ./backup/.zshrc ./backup/.p10k.zsh ./backup/.gitconfig ./backup/.condarc $HOME
 
 echo -e "${BLUE}\n<> Extracting .fonts...${NC}"
 7z x ./backup/fonts.7z -o$HOME

@@ -12,7 +12,7 @@ rm -rfv ./backup
 mkdir -vp ./backup
 
 echo -e "${BLUE}\n <> Backing up .zshrc, .p10k.zsh, .gitconfig...${NC}"
-cp -vf $HOME/.zshrc $HOME/.p10k.zsh $HOME/.gitconfig ./backup
+cp -vf $HOME/.zshrc $HOME/.p10k.zsh $HOME/.gitconfig $HOME/.condarc ./backup
 
 echo -e "${BLUE}\n <> Backing up .fonts...${NC}"
 7z a ./backup/fonts.7z -w $HOME/.fonts

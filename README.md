@@ -2,7 +2,7 @@
 
 Personal Linux dotfiles.
 
-## KDE Arch Linux (Manjaro KDE)
+## KDE Arch Linux
 
 ### Setup
 
@@ -47,7 +47,7 @@ $ sh ./archBackup
 
     a. Plasma style: Future-dark
 
-    b. Window Decorations: No border + No titlebar button tooltips
+    b. Window Decorations: No border (Window border size) + No titlebar button tooltips (checkbox)
 
     c. Fonts: SF UI Display + SF Mono
 
@@ -70,5 +70,4 @@ $ sh ./archBackup
 5. minecraft-server for joy :>
 6. applet-window-appmenu for window appmenu (GitHub Repo)
 7. applet-window-buttons for window buttons (GitHub Repo)
-8. latte-dock for Latte dock (GitHub Repo)
-9. Yin-Yang for Yin Yang (GitHub Repo)
+8. Yin-Yang for Yin Yang (GitHub Repo)
