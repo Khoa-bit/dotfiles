@@ -7,23 +7,33 @@ NC='\033[0m' # No Color
 
 set -o errexit -o nounset
 
+keepExistingConfig() {
+    array=( "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.gitconfig" \
+        "$HOME/.condarc" "$HOME/.oh-my-zsh" "$HOME/.local" "$HOME/Packages" )
+
+    # iterate over each element in turn
+    for item in "${array[@]}"; do
+        if [ -e ${item} ]
+            then mv -f -v ${item} "${item}.old"
+        fi
+    done
+}
+
+# === Main ===
 echo -e "${BLUE}\n<> Extracting .zshrc, .p10k.zsh, .gitconfig...${NC}"
-cp -v $HOME/.zshrc $HOME/.zshrc.old
-cp -v $HOME/.p10k.zsh $HOME/.p10k.zsh.old
-cp -v $HOME/.gitconfig $HOME/.gitconfig.old
-cp -v $HOME/.condarc $HOME/.condarc.old
+keepExistingConfig
 cp -v ./backup/.zshrc ./backup/.p10k.zsh ./backup/.gitconfig ./backup/.condarc $HOME
 
 echo -e "${BLUE}\n<> Extracting .fonts...${NC}"
 7z x ./backup/fonts.7z -o$HOME
 
 echo -e "${BLUE}\n<> Extracting .oh-my-zsh/custom...${NC}"
-cp -v --interactive -r ./backup/.oh-my-zsh $HOME
+cp -v -r ./backup/.oh-my-zsh $HOME
 
 echo -e "${BLUE}\n<> Extracting .local/bin/*.sh...${NC}"
-cp -v --interactive -r ./backup/.local $HOME
+cp -v -r ./backup/.local $HOME
 
 echo -e "${BLUE}\n<> Extracting Packages...${NC}"
-cp -v --interactive -r ./backup/Packages $HOME
+cp -v -r ./backup/Packages $HOME
 
 echo -e "${GREEN}\n<> Done!${NC}"
