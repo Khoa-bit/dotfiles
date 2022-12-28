@@ -108,7 +108,7 @@ podmanRootless() {
 # === Main ===
 pacmanInstall
 yayUpdate
-yayInstall
+yayInstall $1
 snapInstall
 scriptInstall
 echo -e "${GREEN}\n<> Installation Done!${NC}"
