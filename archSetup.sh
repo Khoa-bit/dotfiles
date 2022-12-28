@@ -45,7 +45,7 @@ yayInstall() {
         flatpak latte-dock qdirstat syncthing \
         ffmpeg youtube-dl exa zoxide xdman \
         oh-my-zsh-git fzf thefuck tldr bat ripgrep \
-        git 7z snapd openssl \
+        git 7-zip-full snapd openssl \
         podman fuse-overlayfs slirp4netns \
         gnome-keyring micromamba-bin \
         auto-cpufreq neofetch cpufetch-git cmatrix pipes-rs-git \
