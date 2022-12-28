@@ -85,10 +85,11 @@ scriptInstall() {
     curl -fsSL https://get.pnpm.io/install.sh | sh - #pnpm
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
         bash Mambaforge-$(uname)-$(uname -m).sh -
-    conda init
     curl -s "https://get.sdkman.io" | zsh # SDKMan!
     
+    zsh
     source ~/.zshrc
+    conda init
     pnpm add -g tldr
 }
 
