@@ -44,7 +44,7 @@ yayInstall() {
     $yayIns zsh ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
         ffmpeg youtube-dl exa zoxide xdman \
-        oh-my-zsh-git fzf thefuck tldr bat ripgrep \
+        fzf thefuck tldr bat ripgrep \
         git 7-zip-full snapd openssl \
         podman fuse-overlayfs slirp4netns \
         gnome-keyring \
@@ -81,6 +81,7 @@ flatpakInstall() {
 
 scriptInstall() {
     echo -e "${BLUE}\n<> Installing scripts...${NC}"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh-my-zsh
     curl -fsSL https://get.pnpm.io/install.sh | sh - #pnpm
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
         bash Mambaforge-$(uname)-$(uname -m).sh -
