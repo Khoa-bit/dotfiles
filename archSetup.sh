@@ -47,7 +47,7 @@ yayInstall() {
         oh-my-zsh-git fzf thefuck tldr bat ripgrep \
         git 7-zip-full snapd openssl \
         podman fuse-overlayfs slirp4netns \
-        gnome-keyring micromamba-bin \
+        gnome-keyring \
         auto-cpufreq neofetch cpufetch-git cmatrix pipes-rs-git \
         notion-app-enhanced stremio
 
