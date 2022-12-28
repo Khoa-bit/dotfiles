@@ -106,11 +106,11 @@ podmanRootless() {
 }
 
 # === Main ===
-scriptInstall
 pacmanInstall
 yayUpdate
 yayInstall
 snapInstall
+scriptInstall
 echo -e "${GREEN}\n<> Installation Done!${NC}"
 
 podmanRootless
