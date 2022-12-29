@@ -106,6 +106,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias dls="youtube-dl -x --audio-format best --no-playlist "
+alias dlpl="youtube-dl -x --audio-format best "
+alias dlv="youtube-dl "
+alias ls="exa -la --icons --group-directories-first"
+alias cat='bat'
+alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

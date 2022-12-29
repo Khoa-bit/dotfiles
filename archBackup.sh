@@ -7,6 +7,19 @@ NC='\033[0m' # No Color
 
 set -o errexit -o nounset
 
+replaceUserTag() {
+    shopt -s globstar
+    shopt -s dotglob
+    shopt -s nocaseglob
+    
+    for file in backup/**/*.*; do
+        if [ -d "$file" ]; then continue; fi
+        echo sed -i "s/\$USER/$USER/g" $file
+        sed -i "s/\$USER/$USER/g" $file
+    done
+}
+
+# === Main ===
 echo -e "${BLUE}\n <> Creating backup directory...${NC}"
 rm -rfv ./backup
 mkdir -vp ./backup
@@ -14,22 +27,26 @@ mkdir -vp ./backup
 echo -e "${BLUE}\n <> Backing up .zshrc, .p10k.zsh, .gitconfig...${NC}"
 cp -vf $HOME/.zshrc $HOME/.p10k.zsh $HOME/.gitconfig $HOME/.condarc ./backup
 
-echo -e "${BLUE}\n <> Backing up .fonts...${NC}"
-7z a ./backup/fonts.7z -w $HOME/.fonts
-
-echo -e "${BLUE}\n <> Backing up .oh-my-zsh/custom...${NC}"
-mkdir -vp ./backup/.oh-my-zsh
-cp -vrf $HOME/.oh-my-zsh/custom ./backup/.oh-my-zsh
-# Reinstall powerlevel10k from Github
-rm -vr ./backup/.oh-my-zsh/custom/themes
-
 echo -e "${BLUE}\n <> Backing up .local/bin/*.sh...${NC}"
-mkdir -vp ./backup/.local
-cp -vf $HOME/.local/bin/*.sh ./backup/.local
+mkdir -vp ./backup/.local/bin
+cp -vf $HOME/.local/bin/*.sh ./backup/.local/bin
+
+echo -e "${BLUE}\n <> Backing up .local/share/konsole...${NC}"
+mkdir -vp ./backup/.local/share
+cp -vrf $HOME/.local/share/konsole ./backup/.local/share
+
+echo -e "${BLUE}\n <> Backing up .config/...${NC}"
+mkdir -vp ./backup/.config
+cp -vf $HOME/.config/konsolerc $HOME/.config/krunnerrc ./backup/.config
 
 echo -e "${BLUE}\n <> Backing up 2 Packages...${NC}"
 mkdir -vp ./backup/Packages/
-cp -vrf $HOME/Packages/ChromeOsButtons ./backup/Packages
 cp -vrf $HOME/Packages/HandMade_Notion_Icons ./backup/Packages
+
+echo -e "${BLUE}\n <> Backing up .fonts...${NC}"
+7z a ./backup/fonts.7z -w $HOME/.fonts
+
+echo -e "${BLUE}\n <> Replacing User tag for all files ...${NC}"
+replaceUserTag $USER
 
 echo -e "${GREEN}\n<> Done!\n${NC}"

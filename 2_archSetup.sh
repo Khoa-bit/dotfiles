@@ -44,10 +44,10 @@ yayInstall() {
     $yayIns zsh ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
         ffmpeg youtube-dl exa zoxide xdman \
-        fzf thefuck tldr bat ripgrep \
+        fzf thefuck tldr bat ripgrep github-cli \
         git 7-zip-full zip unzip snapd openssl \
         podman fuse-overlayfs slirp4netns \
-        gnome-keyring \
+        gnome-keyring vscodium-bin visual-studio-code-bin \
         auto-cpufreq neofetch cpufetch-git cmatrix pipes-rs-git \
         notion-app-enhanced stremio
 
@@ -71,24 +71,21 @@ flatpakIns="flatpak install --no-wait"
 flatpakInstall() {
     echo -e "${BLUE}\n<> Installing Snap packages...${NC}"
     flatpak install -y \
-        flathub com.getpostman.Postman com.visualstudio.code \
+        flathub com.getpostman.Postman \
         com.discordapp.Discord com.brave.Browser org.videolan.VLC \
         com.github.tchx84.Flatseal com.obsproject.Studio \
         com.bitwarden.desktop org.qbittorrent.qBittorrent \
-        com.vscodium.codium com.axosoft.GitKraken
+        com.axosoft.GitKraken
         # com.calibre_ebook.calibre org.musicbrainz.Picard
 }
 
 scriptInstall() {
     echo -e "${BLUE}\n<> Installing scripts...${NC}"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh-my-zsh
     curl -fsSL https://get.pnpm.io/install.sh | sh - #pnpm
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
         bash Mambaforge-$(uname)-$(uname -m).sh -
     curl -s "https://get.sdkman.io" | zsh # SDKMan!
     
-    zsh
-    source ~/.zshrc
     conda init
     pnpm add -g tldr
 }
