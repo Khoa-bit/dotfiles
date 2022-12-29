@@ -56,10 +56,10 @@ echo -e "${BLUE}\n<> Extracting .zshrc, .p10k.zsh, .gitconfig...${NC}"
 cp -vf ./backup/.zshrc ./backup/.p10k.zsh ./backup/.gitconfig ./backup/.condarc $HOME
 
 echo -e "${BLUE}\n<> Extracting .local/bin/*.sh...${NC}"
-cp -vrf ./backup/.local/bin $HOME
+cp -vrf ./backup/.local/bin $HOME/.local
 
 echo -e "${BLUE}\n<> Extracting .local/bin/share...${NC}"
-cp -vrf ./backup/.local/share $HOME
+cp -vrf ./backup/.local/share $HOME/.local
 
 echo -e "${BLUE}\n<> Extracting .config/...${NC}"
 cp -vrf ./backup/.config $HOME
