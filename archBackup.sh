@@ -14,8 +14,8 @@ replaceUserTag() {
     
     for file in backup/**/*.*; do
         if [ -d "$file" ]; then continue; fi
-        echo sed -i "s/\$USER/$USER/g" $file
-        sed -i "s/\$USER/$USER/g" $file
+        echo sed -i "s/$USER/\$USER/g" $file
+        sed -i "s/$USER/\$USER/g" $file
     done
 }
 

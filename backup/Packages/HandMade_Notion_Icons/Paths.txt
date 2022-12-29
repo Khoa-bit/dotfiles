@@ -1,6 +1,6 @@
 ico + png:      /opt/Notion Enhanced/resources/app/
 png + tray.js:  /opt/Notion Enhanced/resources/app/embedded_enhancer/mods/core/icons/
-svg:            /home/galactyx/.local/share/icons/
+svg:            /home/$USER/.local/share/icons/
 
 ---------------------------
 tray.js
