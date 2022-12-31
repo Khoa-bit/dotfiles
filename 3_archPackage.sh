@@ -10,7 +10,6 @@ set -o errexit -o nounset
 
 echo -e "${BLUE}\n<> Disable conda auto activate...${NC}"
 conda config --set auto_activate_base false
-conda deactivate
 
 echo -e "${BLUE}\n<> Installing global PNPM package...${NC}"
 pnpm add -g tldr
