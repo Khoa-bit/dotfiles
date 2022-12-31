@@ -43,7 +43,7 @@ yayInstall() {
 
     $yayIns zsh ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
-        ffmpeg youtube-dl exa zoxide xdman \
+        ffmpeg youtube-dl exa zoxide \
         fzf thefuck tldr bat ripgrep github-cli \
         git 7-zip-full zip unzip snapd openssl \
         podman fuse-overlayfs slirp4netns \
@@ -115,6 +115,9 @@ echo -e "${GREEN}\n<> Installation Done!${NC}"
 podmanRootless
 archConfig
 echo -e "${GREEN}\n<> Setup Done!${NC}"
+
+sh ./_archCreateSymlink.sh
+sh ./_archCustomize.sh
 
 # ! Enable services
 # ! auto-cpufreq - Automatic CPU speed & power optimizer for Linux
