@@ -8,4 +8,5 @@ NC='\033[0m' # No Color
 set -o errexit -o nounset
 
 echo -e "${BLUE}\n<> Installing ZSH...${NC}"
+sudo pacman -S zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh-my-zsh
