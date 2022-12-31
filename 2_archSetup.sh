@@ -84,17 +84,14 @@ scriptInstall() {
     curl -fsSL https://get.pnpm.io/install.sh | sh - #pnpm
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
         bash Mambaforge-$(uname)-$(uname -m).sh -
-    curl -s "https://get.sdkman.io" | zsh # SDKMan!
-    
-    conda init
-    pnpm add -g tldr
+    curl -s "https://get.sdkman.io" | zsh # SDKMan!    
 }
 
 archConfig() {
     echo -e "${BLUE}\n<> Config Arch...${NC}"
-    sh ./archCreateSymlink.sh
-    sh ./archExtract.sh
-    sh ./archCustomize.sh
+    sh ./_archCreateSymlink.sh
+    sh ./_archExtract.sh
+    sh ./_archCustomize.sh
 }
 
 podmanRootless() {
@@ -118,6 +115,12 @@ echo -e "${GREEN}\n<> Setup Done!${NC}"
 
 sh ./_archCreateSymlink.sh
 sh ./_archCustomize.sh
+
+# ! Enable services
+# ! auto-cpufreq - Automatic CPU speed & power optimizer for Linux
+# Configure auto-cpufreq - https://github.com/AdnanHodzic/auto-cpufreq#auto-cpufreq-modes-and-options
+echo -e "${GREEN}\n<> Source .zshrc before running 3_archPackage by:${NC}"
+echo -e "source ~/.zshrc"
 
 # ! Enable services
 # ! auto-cpufreq - Automatic CPU speed & power optimizer for Linux
