@@ -61,14 +61,11 @@ cp -vrf ./backup/.local/bin $HOME/.local
 echo -e "${BLUE}\n<> Extracting .local/bin/share...${NC}"
 cp -vrf ./backup/.local/share $HOME/.local
 
-echo -e "${BLUE}\n<> Extracting .config/...${NC}"
-cp -vrf ./backup/.config $HOME
-
 echo -e "${BLUE}\n<> Extracting Packages...${NC}"
 cp -vrf ./backup/Packages $HOME
 
-echo -e "${BLUE}\n<> Extracting .fonts...${NC}"
-7z x ./backup/fonts.7z -o$HOME
+echo -e "${YELLOW}\n<> Extracting .fonts is disabled${NC}"
+# 7z x ./backup/fonts.7z -o$HOME
 
 echo -e "${BLUE}\n <> Replacing User tag for all files ...${NC}"
 replaceUserTag $USER

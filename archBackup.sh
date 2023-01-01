@@ -35,10 +35,6 @@ echo -e "${BLUE}\n <> Backing up .local/share/konsole...${NC}"
 mkdir -vp ./backup/.local/share
 cp -vrf $HOME/.local/share/konsole ./backup/.local/share
 
-echo -e "${BLUE}\n <> Backing up .config/...${NC}"
-mkdir -vp ./backup/.config
-cp -vf $HOME/.config/konsolerc $HOME/.config/krunnerrc ./backup/.config
-
 echo -e "${BLUE}\n <> Backing up 2 Packages...${NC}"
 mkdir -vp ./backup/Packages/
 cp -vrf $HOME/Packages/HandMade_Notion_Icons ./backup/Packages

@@ -8,26 +8,13 @@ NC='\033[0m' # No Color
 
 set -o errexit -o nounset
 
-if [ $# -ne 1 ];
-then
-    echo -e "${RED}Missing 1 arugment${NC}"
-    echo -e "sh $0 ${BLUE}<X11 or Wayland>${NC}"
-    exit 0
-
-elif [ $1 != "X11" ] && [ $1 != "Wayland" ];
-then
-    echo "${RED}Incorrect arugment: $1${NC}"
-    echo -e "sh $0 ${BLUE}<X11 or Wayland>${NC}"
-    exit 0
-
-fi
-
 # install yay and devel
-pacmanIns="sudo pacman -S --noconfirm --needed base-devel wget yay"
+pacmanIns="sudo pacman -S --noconfirm --needed"
 pacmanInstall() {
     echo -e "${BLUE}\n<> Pacman Installing base-devel wget yay...${NC}"
+    pacman -V
 
-    $pacmanIns
+    $pacmanIns base-devel wget yay
 }
 
 yayUp="yay -Syu --noconfirm --needed"
@@ -40,36 +27,43 @@ yayUpdate() {
 yayIns="yay -S --noconfirm --needed"
 yayInstall() {
     echo -e "${BLUE}\n<> Yay Installing all packages...${NC}"
+    yay -V
 
-    $yayIns zsh ttf-ms-fonts ibus-bamboo \
+    $yayIns nerd-fonts-complete ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
-        ffmpeg youtube-dl exa zoxide \
+        ffmpeg exa zoxide \
         fzf thefuck tldr bat ripgrep github-cli \
         git 7-zip-full zip unzip snapd openssl \
         podman fuse-overlayfs slirp4netns \
         gnome-keyring vscodium-bin visual-studio-code-bin \
-        auto-cpufreq neofetch cpufetch-git cmatrix pipes-rs-git \
+        fastfetch onefetch cpufetch-git clyrics nitch \
+        cmatrix pipes-rs-git \
         notion-app-enhanced stremio
 
-    if [ $1 == "X11" ];
-    then
-        echo -e "${BLUE}<> X11 packages Installing...${NC}"
-        $yayIns easystroke touchegg touche
-
-    elif [ $1 == "Wayland" ];
-    then
-        echo -e "${BLUE}<> Wayland packages Installing...${NC}"
-    fi
+    case $DESKTOP_ENV in
+        "X11" ) 
+            echo -e "${BLUE}<> Installing X11 packages...${NC}"
+            $yayIns easystroke touchegg touche
+            break;;
+        "Wayland" ) 
+            echo -e "${BLUE}<> Installing Wayland packages...${NC}"
+            break;;
+    esac
 }
 
 snapIns="sudo snap install --no-wait"
 snapInstall() {
     echo -e "${BLUE}\n<> Installing Snap packages...${NC}"
+    sudo systemctl enable --now snapd.socket
+    sudo ln -s /var/lib/snapd/snap /snap
+    snap --version
 }
 
 flatpakIns="flatpak install --no-wait"
 flatpakInstall() {
-    echo -e "${BLUE}\n<> Installing Snap packages...${NC}"
+    echo -e "${BLUE}\n<> Installing Flatpak packages...${NC}"
+    flatpak --version
+
     flatpak install -y \
         flathub com.getpostman.Postman \
         com.discordapp.Discord com.brave.Browser org.videolan.VLC \
@@ -88,42 +82,37 @@ scriptInstall() {
 }
 
 archConfig() {
-    echo -e "${BLUE}\n<> Config Arch...${NC}"
+    echo -e "${BLUE}\n<> Configuring Arch...${NC}"
     sh ./_archCreateSymlink.sh
     sh ./_archExtract.sh
     sh ./_archCustomize.sh
 }
 
 podmanRootless() {
-    echo -e "${BLUE}\n<> Config Podman Rootless...${NC}"
+    echo -e "${BLUE}\n<> Configuring Podman Rootless...${NC}"
     sudo sysctl kernel.unprivileged_userns_clone=1 -w
     sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 $USER
     podman system migrate
 }
 
 # === Main ===
+sudo echo -e "${GREEN}\n<> Successfully authenticated as SU...${NC}"
+
+DESKTOP_ENV=""
+
+echo -e "${YELLOW}\n<> Choose your current desktop environment:${NC}"
+select choice in "X11" "Wayland"; do
+    DESKTOP_ENV=$choice
+done
+echo -e "${GREEN}\n== Chosen: ${DESKTOP_ENV} ==${NC}"
+
 pacmanInstall
 yayUpdate
-yayInstall $1
+yayInstall $DESKTOP_ENV
 snapInstall
 scriptInstall
 echo -e "${GREEN}\n<> Installation Done!${NC}"
 
-podmanRootless
 archConfig
+podmanRootless
 echo -e "${GREEN}\n<> Setup Done!${NC}"
-
-sh ./_archCreateSymlink.sh
-sh ./_archCustomize.sh
-
-# ! Enable services
-# ! auto-cpufreq - Automatic CPU speed & power optimizer for Linux
-# Configure auto-cpufreq - https://github.com/AdnanHodzic/auto-cpufreq#auto-cpufreq-modes-and-options
-echo -e "${GREEN}\n<> Source .zshrc before running 3_archPackage by:${NC}"
-echo -e "source ~/.zshrc"
-
-# ! Enable services
-# ! auto-cpufreq - Automatic CPU speed & power optimizer for Linux
-# Configure auto-cpufreq - https://github.com/AdnanHodzic/auto-cpufreq#auto-cpufreq-modes-and-options
-echo -e "${GREEN}\n<> To enable auto-cpufreq create a service for it by:${NC}"
-echo -e "systemctl enable auto-cpufreq.service"

@@ -7,6 +7,10 @@ NC='\033[0m' # No Color
 
 set -o errexit -o nounset
 
+pacmanIns="sudo pacman -S --noconfirm --needed"
+
+sudo echo -e "${GREEN}\n<> Successfully authenticated as SU...${NC}"
+
 echo -e "${BLUE}\n<> Installing ZSH...${NC}"
-sudo pacman -S zsh
+pacmanIns zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # oh-my-zsh

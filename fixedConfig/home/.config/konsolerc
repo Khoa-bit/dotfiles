@@ -1,0 +1,31 @@
+[Desktop Entry]
+DefaultProfile=Personal.profile
+
+[Favorite Profiles]
+Favorites=Breath2.profile
+
+[General]
+ConfigVersion=1
+
+[MainWindow]
+MenuBar=Disabled
+StatusBar=Disabled
+
+[MainWindow][Toolbar sessionToolbar]
+IconSize=16
+ToolButtonStyle=TextOnly
+
+[TabBar]
+CloseTabOnMiddleMouseButton=true
+NewTabBehavior=PutNewTabAfterCurrentTab
+TabBarPosition=Top
+
+[ThumbnailsSettings]
+ThumbnailCtrl=true
+
+[Toolbar sessionToolbar]
+IconSize=16
+ToolButtonStyle=TextOnly
+
+[UiSettings]
+ColorScheme=
