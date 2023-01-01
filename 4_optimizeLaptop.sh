@@ -6,7 +6,7 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-set -o errexit -o nounset
+# set -o errexit -o nounset
 
 yayIns="yay -S --noconfirm --needed"
 yayRns="yay -Rns --noconfirm --needed"
@@ -21,16 +21,16 @@ installTLP() {
     # https://github.com/linrunner/TLP
     $yayRns auto-cpufreq power-profiles-daemon
     $yayIns tlp tlp-rdw
-    systemctl enable tlp.service
-    systemctl enable NetworkManager-dispatcher.service
-    systemctl mask systemd-rfkill.service systemd-rfkill.socket
+    sudo systemctl enable tlp.service
+    sudo systemctl enable NetworkManager-dispatcher.service
+    sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 }
 
 installAutoCpuFreq() {
     # https://github.com/AdnanHodzic/auto-cpufreq
     $yayRns power-profiles-daemon tlp tlp-rdw
     $yayIns auto-cpufreq
-    systemctl enable auto-cpufreq.service
+    sudo systemctl enable auto-cpufreq.service
 }
 
 installPowerProfilesDaemon() {
@@ -38,15 +38,15 @@ installPowerProfilesDaemon() {
     # https://gitlab.freedesktop.org/hadess/power-profiles-daemon
     $yayRns auto-cpufreq tlp tlp-rdw
     $yayIns power-profiles-daemon
-    systemctl enable power-profiles-daemon
+    sudo systemctl enable power-profiles-daemon
 }
 
 disableServices() {
-    systemctl disable tlp.service
-    systemctl disable NetworkManager-dispatcher.service
-    systemctl unmask  systemd-rfkill.service systemd-rfkill.socket
-    systemctl disable auto-cpufreq.service
-    systemctl disable power-profiles-daemon
+    sudo systemctl disable tlp.service
+    sudo systemctl disable NetworkManager-dispatcher.service
+    sudo systemctl unmask  systemd-rfkill.service systemd-rfkill.socket
+    sudo systemctl disable auto-cpufreq.service
+    sudo systemctl disable power-profiles-daemon
 }
 
 # === Main ===
