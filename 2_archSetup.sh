@@ -103,6 +103,7 @@ DESKTOP_ENV=""
 echo -e "${YELLOW}\n<> Choose your current desktop environment:${NC}"
 select choice in "X11" "Wayland"; do
     DESKTOP_ENV=$choice
+    break;;
 done
 echo -e "${GREEN}\n== Chosen: ${DESKTOP_ENV} ==${NC}"
 
