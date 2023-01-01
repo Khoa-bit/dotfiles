@@ -7,7 +7,6 @@ NC='\033[0m' # No Color
 
 set -o errexit -o nounset
 
-pacmanIns="sudo pacman -S --noconfirm --needed"
 yayIns="yay -S --noconfirm --needed"
 yayRns="yay -Rns --noconfirm --needed"
 
@@ -19,8 +18,8 @@ echo -e "systemctl enable auto-cpufreq.service"
 
 installTLP() {
     # https://github.com/linrunner/TLP
-    yayRns auto-cpufreq power-profiles-daemon
-    yayIns tlp tlp-rdw
+    $yayRns auto-cpufreq power-profiles-daemon
+    $yayIns tlp tlp-rdw
     systemctl enable tlp.service
     systemctl enable NetworkManager-dispatcher.service
     systemctl mask systemd-rfkill.service systemd-rfkill.socket
@@ -28,16 +27,16 @@ installTLP() {
 
 installAutoCpuFreq() {
     # https://github.com/AdnanHodzic/auto-cpufreq
-    yayRns power-profiles-daemon tlp tlp-rdw
-    yayIns auto-cpufreq
+    $yayRns power-profiles-daemon tlp tlp-rdw
+    $yayIns auto-cpufreq
     systemctl enable auto-cpufreq.service
 }
 
 installPowerProfilesDaemon() {
     # Usually the default for most Distros
     # https://gitlab.freedesktop.org/hadess/power-profiles-daemon
-    yayRns auto-cpufreq tlp tlp-rdw
-    yayIns power-profiles-daemon
+    $yayRns auto-cpufreq tlp tlp-rdw
+    $yayIns power-profiles-daemon
     systemctl enable power-profiles-daemon
 }
 
