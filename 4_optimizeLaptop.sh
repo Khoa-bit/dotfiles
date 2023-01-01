@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 # set -o errexit -o nounset
 
-yayIns="yay -S --noconfirm --needed"
+yayIns="yay -S --needed"
 yayRns="yay -Rns --noconfirm --needed"
 
 # ! Enable services
