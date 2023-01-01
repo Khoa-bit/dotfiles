@@ -50,7 +50,7 @@ disableServices() {
 
 # === Main ===
 echo -e "${RED}\n!! Warning !! Please check the currently running optimize service${NC}"
-systemctl list-units "tlp.service" "auto-cpufreq.service" "power-profiles-daemon"
+systemctl list-units "tlp.service" "auto-cpufreq.service" "power-profiles-daemon.service"
 echo -e "${RED}\n!! Warning !!${NC}"
 
 
