@@ -3,6 +3,7 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 set -o errexit -o nounset
@@ -40,7 +41,8 @@ mkdir -vp ./backup/Packages/
 cp -vrf $HOME/Packages/HandMade_Notion_Icons ./backup/Packages
 
 echo -e "${BLUE}\n <> Backing up .fonts...${NC}"
-7z a ./backup/fonts.7z -w $HOME/.fonts
+echo -e "${YELLOW}Skipped!${NC}"
+# 7z a ./backup/fonts.7z -w $HOME/.fonts
 
 echo -e "${BLUE}\n <> Replacing User tag for all files ...${NC}"
 replaceUserTag $USER

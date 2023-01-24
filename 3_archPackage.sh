@@ -12,4 +12,4 @@ echo -e "${BLUE}\n<> Disable conda auto activate...${NC}"
 conda config --set auto_activate_base false
 
 echo -e "${BLUE}\n<> Installing global PNPM package...${NC}"
-pnpm add -g tldr
+pnpm add -g tldr npm-check

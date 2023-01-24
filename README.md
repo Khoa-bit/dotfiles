@@ -61,6 +61,10 @@ $ sh ./archBackup
 
 6.  Configure gestures Touche - Touchegg
 
+7.  If KDE connect is working, allow its service to be trusted.
+
+<img src="static/firewalld_home.png" />
+
 ### Not Installed
 
 1. ttf-google-fonts-git, ttf-mac-fonts for additional fonts

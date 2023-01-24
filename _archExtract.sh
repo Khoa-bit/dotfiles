@@ -66,6 +66,7 @@ echo -e "${BLUE}\n<> Extracting Packages...${NC}"
 cp -vrf ./backup/Packages $HOME
 
 echo -e "${YELLOW}\n<> Extracting .fonts is disabled${NC}"
+echo -e "${YELLOW}\n <> Skipped!${NC}"
 # 7z x ./backup/fonts.7z -o$HOME
 
 echo -e "${BLUE}\n <> Replacing User tag for all files ...${NC}"

@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=DarkOneNuanced
-Font=MesloLGS NF,11,-1,5,75,0,0,0,0,0,Bold
+Font=MesloLGLDZ Nerd Font,11,-1,5,50,0,0,0,0,0
 
 [General]
 Command=/usr/bin/zsh

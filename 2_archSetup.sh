@@ -31,14 +31,14 @@ yayInstall() {
 
     $yayIns nerd-fonts-complete ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
-        ffmpeg exa zoxide \
-        fzf thefuck tldr bat ripgrep github-cli \
+        ffmpeg exa zoxide noto-fonts-emoji \
+        fzf thefuck bat ripgrep github-cli \
         git 7-zip-full zip unzip snapd openssl \
         podman fuse-overlayfs slirp4netns \
         gnome-keyring vscodium-bin visual-studio-code-bin \
         fastfetch onefetch cpufetch-git clyrics nitch \
         cmatrix pipes-rs-git \
-        notion-app-enhanced stremio
+        notion-app-enhanced stremio plasma-systemmonitor
 
     case $DESKTOP_ENV in
         "X11" ) 
@@ -68,8 +68,9 @@ flatpakInstall() {
         flathub com.getpostman.Postman \
         com.discordapp.Discord com.brave.Browser org.videolan.VLC \
         com.github.tchx84.Flatseal com.obsproject.Studio \
-        com.bitwarden.desktop org.qbittorrent.qBittorrent \
-        com.axosoft.GitKraken
+        org.qbittorrent.qBittorrent \
+        com.axosoft.GitKraken com.usebottles.bottles \
+        org.libreoffice.LibreOffice org.nickvision.money
         # com.calibre_ebook.calibre org.musicbrainz.Picard
 }
 

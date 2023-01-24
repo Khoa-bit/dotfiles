@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zoxide thefuck fzf)
+plugins=(git gitignore gitfast zsh-syntax-highlighting zsh-autosuggestions zoxide thefuck fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,6 +112,7 @@ alias dlv="youtube-dl "
 alias ls="exa -la --icons --group-directories-first"
 alias cat='bat'
 alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias pn=pnpm
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
