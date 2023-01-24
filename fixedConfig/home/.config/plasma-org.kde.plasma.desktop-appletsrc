@@ -31,6 +31,7 @@ Image=/usr/share/wallpapers/Next/
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][122][Wallpaper][org.kde.slideshow][General]
+Image=/home/khoabit/Pictures/Wallpaper-2022-01-01/wallhaven-j3m8y5_2560x1440.png
 SlidePaths=/home/khoabit/Pictures/Wallpaper-2022-01-01/
 
 [Containments][123]
@@ -191,6 +192,8 @@ immutability=1
 lastScreen=0
 location=3
 plugin=org.kde.plasma.private.systemtray
+popupHeight=432
+popupWidth=432
 wallpaperplugin=org.kde.image
 
 [Containments][208][Applets][209]
@@ -216,6 +219,9 @@ plugin=org.kde.plasma.printmanager
 [Containments][208][Applets][214]
 immutability=1
 plugin=org.kde.plasma.volume
+
+[Containments][208][Applets][214][Configuration]
+PreloadWeight=55
 
 [Containments][208][Applets][215]
 immutability=1
@@ -245,8 +251,20 @@ plugin=org.kde.plasma.networkmanagement
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
+[Containments][208][Applets][221][Configuration]
+PreloadWeight=60
+
+[Containments][208][Applets][222]
+immutability=1
+plugin=org.kde.plasma.mediacontroller
+
+[Containments][208][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
 [Containments][208][General]
-extraItems=org.kde.plasma.keyboardlayout,org.kde.plasma.keyboardindicator,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.manage-inputmethod,org.kde.plasma.printmanager,org.kde.plasma.networkmanagement,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.clipboard,org.kde.plasma.notifications,org.kde.plasma.nightcolorcontrol,org.kde.plasma.battery,org.kde.kdeconnect
+extraItems=org.kde.plasma.keyboardlayout,org.kde.plasma.keyboardindicator,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.manage-inputmethod,org.kde.plasma.printmanager,org.kde.plasma.networkmanagement,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.clipboard,org.kde.plasma.battery,org.kde.kdeconnect,org.kde.plasma.notifications,org.kde.plasma.nightcolorcontrol,firewall-applet
+hiddenItems=org.kde.plasma.nightcolorcontrol,firewall-applet
 knownItems=org.kde.plasma.keyboardlayout,org.kde.plasma.keyboardindicator,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.manage-inputmethod,org.kde.plasma.printmanager,org.kde.plasma.networkmanagement,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.clipboard,org.kde.plasma.notifications,org.kde.plasma.nightcolorcontrol,org.kde.plasma.battery,org.kde.kdeconnect
 
 [Containments][97]
@@ -361,7 +379,7 @@ plugin=org.kde.plasma.digitalclock
 [Containments][97][Applets][99][Configuration]
 PreloadWeight=100
 popupHeight=450
-popupWidth=810
+popupWidth=396
 
 [Containments][97][Applets][99][Configuration][Appearance]
 dateDisplayFormat=BesideTime
