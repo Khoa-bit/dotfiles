@@ -76,9 +76,7 @@ flatpakInstall() {
 
 scriptInstall() {
     echo -e "${BLUE}\n<> Installing scripts...${NC}"
-    curl -fsSL https://get.pnpm.io/install.sh | sh - #pnpm
-    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-        bash Mambaforge-$(uname)-$(uname -m).sh -
+    npm install -g pnpm
     curl -s "https://get.sdkman.io" | zsh # SDKMan!    
 }
 
