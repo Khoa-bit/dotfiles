@@ -1,0 +1,241 @@
+---
+- name: Arch Linux Development Environment Setup
+  hosts: localhost
+  become: yes
+
+  handlers:
+    - name: enable snapd.socket
+      systemd:
+        name: snapd.socket
+        enabled: yes
+        state: started
+
+  tasks:
+    - name: Update pacman package database and system without confirmation
+      pacman:
+        update_cache: yes
+        upgrade: yes
+        noconfirm: yes
+
+    - name: Install ZSH and Oh My Zsh
+      block:
+        - name: Install ZSH
+          pacman:
+            name: zsh
+            state: present
+            update_cache: yes
+            noconfirm: yes
+
+        - name: Install Oh My Zsh
+          shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          args:
+            creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+
+    - name: Install base-devel, wget, yay, flatpak and nodejs
+      pacman:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+        noconfirm: yes
+      loop:
+        - base-devel
+        - wget
+        - yay
+        - flatpak
+        - nodejs
+
+    - name: Update pacman + aur package database and system without confirmation
+      yay:
+        update_cache: yes
+        upgrade: yes
+        noconfirm: yes
+
+    - name: Install packages using yay
+      yay:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+        noconfirm: yes
+      loop:
+        - snapd
+        - nerd-fonts-complete
+        - ttf-ms-fonts
+        - ibus-bamboo
+        - qdirstat
+        - syncthing
+        - ffmpeg
+        - ffprobe
+        - exa
+        - zoxide
+        - noto-fonts-emoji
+        - fzf
+        - thefuck
+        - bat
+        - ripgrep
+        - github-cli
+        - git
+        - 7-zip-full
+        - zip
+        - unzip
+        - openssl
+        - yt-dlp
+        - podman
+        - fuse-overlayfs
+        - slirp4netns
+        - gnome-keyring
+        - vscodium-bin
+        - visual-studio-code-bin
+        - fastfetch
+        - onefetch
+        - cpufetch-git
+        - clyrics
+        - nitch
+        - cmatrix
+        - pipes-rs-git
+        - notion-app-enhanced
+        - stremio
+        - ttf-meslo-nerd
+        - ttf-firacode-nerd
+        - ttf-jetbrains-mono-nerd
+        - ttf-roboto-mono-nerd
+        - ttf-ubuntu-nerd
+        - ttf-ubuntu-mono-nerd
+
+    - name: Enable snapd and link snap directory
+      block:
+        - name: Enable snapd.socket using a handler
+          command: "true"
+          notify: enable snapd.socket
+
+        - name: Create symbolic link for snap
+          file:
+            src: /var/lib/snapd/snap
+            dest: /snap
+            state: link
+            force: yes
+
+    - name: Install flatpak applications
+      flatpak:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - flathub
+        - com.getpostman.Postman
+        - com.discordapp.Discord
+        - com.brave.Browser
+        - org.videolan.VLC
+        - com.github.tchx84.Flatseal
+        - com.obsproject.Studio
+        - org.qbittorrent.qBittorrent
+        - com.axosoft.GitKraken
+        - com.usebottles.bottles
+        - org.libreoffice.LibreOffice
+        # - org.nickvision.money
+        # - com.calibre_ebook.calibre
+        # - org.musicbrainz.Picard
+
+    - name: Install global npm packages
+      npm:
+        name: pnpm
+        global: yes
+
+    - name: Install global PNPM package
+      community.general.pnpm:
+        name: tldr
+        global: yes
+
+    - name: Install SDKMan and configure environment
+      shell: |
+        curl -s "https://get.sdkman.io" | zsh source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
+      args:
+        executable: zsh
+
+    - name: Create symlink for VSCode + VSCodium
+      block:
+        - name: Ensure VSCodium User directory exists
+          file:
+            path: "{{ ansible_env.HOME }}/.config/VSCodium/User"
+            state: directory
+            mode: "0755"
+
+        - name: Create symlinks for VSCode to VSCodium
+          file:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            state: link
+            force: yes
+          with_items:
+            - {
+                src: "{{ ansible_env.HOME }}/.vscode",
+                dest: "{{ ansible_env.HOME }}/.vscode-oss",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/snippets",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/snippets",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/keybindings.json",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/keybindings.json",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/settings.json",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/settings.json",
+              }
+
+    - name: Customize Oh-my-zsh
+      block:
+        - name: Install powerlevel10k theme for Oh-my-zsh
+          git:
+            repo: "https://github.com/romkatv/powerlevel10k.git"
+            dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/themes/powerlevel10k"
+            depth: 1
+
+        - name: Install zsh-autosuggestions plugin for Oh-my-zsh
+          git:
+            repo: "https://github.com/zsh-users/zsh-autosuggestions"
+            dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/plugins/zsh-autosuggestions"
+
+        - name: Install zsh-syntax-highlighting plugin for Oh-my-zsh
+          git:
+            repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+            dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/plugins/zsh-syntax-highlighting"
+
+    - name: Configuring Podman Rootless
+      block:
+        - name: Enable unprivileged user namespaces
+          sysctl:
+            name: kernel.unprivileged_userns_clone
+            value: "1"
+            state: present
+            reload: yes
+
+        - name: Add subuid and subgid entries for the user
+          command: "usermod --add-subuids 100000-165535 --add-subgids 100000-165535 {{ ansible_user_id }}"
+
+        - name: Migrate podman system
+          command: podman system migrate
+
+    - name: Install Miniforge3
+      block:
+        - name: Download Miniforge3 installer script
+          get_url:
+            url: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-{{ ansible_system }}-{{ ansible_userspace_architecture }}.sh"
+            dest: "/tmp/Miniforge3.sh"
+            mode: "0755"
+
+        - name: Install Miniforge3
+          shell:
+            cmd: "/tmp/Miniforge3.sh -b"
+            creates: "{{ ansible_env.HOME }}/miniforge3"
+
+        - name: Disable conda auto activate base
+          lineinfile:
+            path: "{{ ansible_env.HOME }}/.condarc"
+            create: yes
+            line: "auto_activate_base: false"
+            state: present
+
+  post_tasks:
+    - name: Display finish message
+      debug:
+        msg: "Setup Done!"
