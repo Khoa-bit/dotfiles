@@ -31,19 +31,21 @@ yayInstall() {
 
     $yayIns nerd-fonts-complete ttf-ms-fonts ibus-bamboo \
         flatpak latte-dock qdirstat syncthing \
-        ffmpeg exa zoxide noto-fonts-emoji \
+        ffmpeg ffprobe exa zoxide noto-fonts-emoji \
         fzf thefuck bat ripgrep github-cli \
-        git 7-zip-full zip unzip snapd openssl \
+        git 7-zip-full zip unzip snapd openssl yt-dlp \
         podman fuse-overlayfs slirp4netns \
         gnome-keyring vscodium-bin visual-studio-code-bin \
         fastfetch onefetch cpufetch-git clyrics nitch \
         cmatrix pipes-rs-git \
-        notion-app-enhanced stremio plasma-systemmonitor
+        notion-app-enhanced stremio plasma-systemmonitor \
+        ttf-meslo-nerd ttf-firacode-nerd ttf-jetbrains-mono-nerd \
+        ttf-roboto-mono-nerd ttf-ubuntu-nerd ttf-ubuntu-mono-nerd
 
     case $DESKTOP_ENV in
         "X11" ) 
             echo -e "${BLUE}<> Installing X11 packages...${NC}"
-            $yayIns easystroke touchegg touche
+            # $yayIns easystroke touchegg touche
             break;;
         "Wayland" ) 
             echo -e "${BLUE}<> Installing Wayland packages...${NC}"

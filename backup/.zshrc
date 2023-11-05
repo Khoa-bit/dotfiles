@@ -106,9 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias dls="youtube-dl -x --audio-format best --no-playlist "
-alias dlpl="youtube-dl -x --audio-format best "
-alias dlv="youtube-dl "
+alias dls="yt-dlp --audio-format m4a --extract-audio --embed-thumbnail --embed-subs "
+alias dlpl="yt-dlp --audio-format m4a --extract-audio --audio-format best "
+alias dlv="yt-dlp "
 alias ls="exa -la --icons --group-directories-first"
 alias cat='bat'
 alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"

@@ -10,7 +10,7 @@ fi
 export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/khoabit/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -128,7 +128,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # pnpm
-export PNPM_HOME="/home/khoabit/.local/share/pnpm"
+export PNPM_HOME="/home/$USER/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -137,7 +137,7 @@ esac
 
 # >>> Podman + Podman Compose >>>
 export DOCKER_BUILDKIT=0
-export PATH=$PATH:/home/khoabit/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin
+export PATH=$PATH:/home/$USER/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin
 export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
 # <<< Podman + Podman Compose <<<
 
