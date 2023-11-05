@@ -1,0 +1,21 @@
+---
+- name: Arch Linux Development Environment Setup
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Retry installing failed packages using yay
+      yay:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - nitch
+        - pipes-rs-git
+        - streamio
+      when: failed_packages | length > 0
+
+  post_tasks:
+    - name: Display finish message
+      debug:
+        msg: "Setup Done!"
