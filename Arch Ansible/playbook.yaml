@@ -96,6 +96,7 @@
         - ttf-roboto-mono-nerd
         - ttf-ubuntu-nerd
         - ttf-ubuntu-mono-nerd
+      register: package_results
       ignore_errors: yes
 
     - name: Identify failed packages
