@@ -2,6 +2,8 @@
 - name: Arch Linux Development Environment Setup
   hosts: localhost
   become: yes
+  vars:
+    failed_packages: []
 
   handlers:
     - name: enable snapd.socket
@@ -97,18 +99,21 @@
         - ttf-ubuntu-nerd
         - ttf-ubuntu-mono-nerd
       register: package_results
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Identify failed packages
       set_fact:
-        failed_packages: "{{ failed_packages | default([]) + [item.item] }}"
+        failed_packages: "{{ failed_packages + [item.item] }}"
       loop: "{{ package_results.results }}"
       when: item.failed
 
-    - name: List failed packages
-      debug:
-        msg: "These packages failed to install: {{ failed_packages }}"
-      when: failed_packages is defined
+    - name: Retry installing failed packages using yay
+      yay:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ failed_packages }}"
+      when: failed_packages | length > 0
 
     - name: Enable snapd and link snap directory
       block:
