@@ -144,7 +144,7 @@
           file:
             path: "{{ ansible_env.HOME }}/.config/VSCodium/User"
             state: directory
-            mode: '0755'
+            mode: "0755"
 
         - name: Create symlinks for VSCode to VSCodium
           file:
@@ -153,27 +153,39 @@
             state: link
             force: yes
           with_items:
-            - { src: "{{ ansible_env.HOME }}/.vscode", dest: "{{ ansible_env.HOME }}/.vscode-oss" }
-            - { src: "{{ ansible_env.HOME }}/.config/Code/User/snippets", dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/snippets" }
-            - { src: "{{ ansible_env.HOME }}/.config/Code/User/keybindings.json", dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/keybindings.json" }
-            - { src: "{{ ansible_env.HOME }}/.config/Code/User/settings.json", dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/settings.json" }
+            - {
+                src: "{{ ansible_env.HOME }}/.vscode",
+                dest: "{{ ansible_env.HOME }}/.vscode-oss",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/snippets",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/snippets",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/keybindings.json",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/keybindings.json",
+              }
+            - {
+                src: "{{ ansible_env.HOME }}/.config/Code/User/settings.json",
+                dest: "{{ ansible_env.HOME }}/.config/VSCodium/User/settings.json",
+              }
 
     - name: Customize Oh-my-zsh
       block:
         - name: Install powerlevel10k theme for Oh-my-zsh
           git:
-            repo: 'https://github.com/romkatv/powerlevel10k.git'
+            repo: "https://github.com/romkatv/powerlevel10k.git"
             dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/themes/powerlevel10k"
             depth: 1
 
         - name: Install zsh-autosuggestions plugin for Oh-my-zsh
           git:
-            repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+            repo: "https://github.com/zsh-users/zsh-autosuggestions"
             dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/plugins/zsh-autosuggestions"
 
         - name: Install zsh-syntax-highlighting plugin for Oh-my-zsh
           git:
-            repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+            repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
             dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/plugins/zsh-syntax-highlighting"
 
     - name: Configuring Podman Rootless
@@ -191,25 +203,25 @@
         - name: Migrate podman system
           command: podman system migrate
 
-      - name: Install Miniforge3
-        block:
-          - name: Download Miniforge3 installer script
-            get_url:
-              url: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-{{ ansible_system }}-{{ ansible_userspace_architecture }}.sh"
-              dest: "/tmp/Miniforge3.sh"
-              mode: '0755'
+    - name: Install Miniforge3
+      block:
+        - name: Download Miniforge3 installer script
+          get_url:
+            url: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-{{ ansible_system }}-{{ ansible_userspace_architecture }}.sh"
+            dest: "/tmp/Miniforge3.sh"
+            mode: "0755"
 
-          - name: Install Miniforge3
-            shell:
-              cmd: "/tmp/Miniforge3.sh -b"
-              creates: "{{ ansible_env.HOME }}/miniforge3"
+        - name: Install Miniforge3
+          shell:
+            cmd: "/tmp/Miniforge3.sh -b"
+            creates: "{{ ansible_env.HOME }}/miniforge3"
 
-          - name: Disable conda auto activate base
-            lineinfile:
-              path: "{{ ansible_env.HOME }}/.condarc"
-              create: yes
-              line: "auto_activate_base: false"
-              state: present
+        - name: Disable conda auto activate base
+          lineinfile:
+            path: "{{ ansible_env.HOME }}/.condarc"
+            create: yes
+            line: "auto_activate_base: false"
+            state: present
 
   post_tasks:
     - name: Display finish message
