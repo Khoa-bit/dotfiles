@@ -42,15 +42,17 @@
         - nodejs
 
     - name: Update pacman + aur package database and system without confirmation
-      yay:
+      pacman:
         update_cache: yes
         upgrade: yes
 
     - name: Install packages using yay
-      yay:
+      pacman:
         name: "{{ item }}"
         state: present
         update_cache: yes
+        executable: yay
+        extra_args: --builddir /var/cache/yay
       loop:
         - snapd
         - nerd-fonts-complete
