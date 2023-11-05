@@ -15,7 +15,6 @@
       pacman:
         update_cache: yes
         upgrade: yes
-        noconfirm: yes
 
     - name: Install ZSH and Oh My Zsh
       block:
@@ -24,7 +23,6 @@
             name: zsh
             state: present
             update_cache: yes
-            noconfirm: yes
 
         - name: Install Oh My Zsh
           shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -36,7 +34,6 @@
         name: "{{ item }}"
         state: present
         update_cache: yes
-        noconfirm: yes
       loop:
         - base-devel
         - wget
@@ -48,14 +45,12 @@
       yay:
         update_cache: yes
         upgrade: yes
-        noconfirm: yes
 
     - name: Install packages using yay
       yay:
         name: "{{ item }}"
         state: present
         update_cache: yes
-        noconfirm: yes
       loop:
         - snapd
         - nerd-fonts-complete
