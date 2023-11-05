@@ -68,7 +68,7 @@
         - noto-fonts-emoji
         - fzf
         - thefuck
-        - bat
+        - batgit
         - ripgrep
         - github-cli
         - git
@@ -96,6 +96,18 @@
         - ttf-roboto-mono-nerd
         - ttf-ubuntu-nerd
         - ttf-ubuntu-mono-nerd
+      ignore_errors: yes
+
+    - name: Identify failed packages
+      set_fact:
+        failed_packages: "{{ failed_packages | default([]) + [item.item] }}"
+      loop: "{{ package_results.results }}"
+      when: item.failed
+
+    - name: List failed packages
+      debug:
+        msg: "These packages failed to install: {{ failed_packages }}"
+      when: failed_packages is defined
 
     - name: Enable snapd and link snap directory
       block:
