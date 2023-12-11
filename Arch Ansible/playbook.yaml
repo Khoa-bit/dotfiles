@@ -47,9 +47,12 @@
             update_cache: yes
     
         - name: Install Oh My Zsh
-          shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
           args:
             creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+
+        - name: Set ZSH as the default shell
+          shell: chsh -s $(which zsh)
     
     - name: Install base-devel, wget, yay, flatpak and nodejs
       become: true
