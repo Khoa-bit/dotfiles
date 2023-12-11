@@ -1,25 +1,23 @@
 ---
-- name: Grant passwordless sudo to ansibleSetup user
+- name: Grant passwordless sudo to current user
   hosts: localhost
-  become: yes # This playbook needs to be run as a user with sudo privileges
+  become: true # This playbook needs to be run as a user with sudo privileges
   tasks:
-    - name: Ensure ansibleSetup user is present
+    - name: Ensure {{ USERNAME }} user is present
       ansible.builtin.user:
-        name: ansibleSetup
+        name: "{{ USERNAME }}"
         state: present
 
-    - name: Allow ansibleSetup user to run sudo without password
+    - name: Allow {{ USERNAME }} user to run sudo without password
       ansible.builtin.lineinfile:
         path: /etc/sudoers
         state: present
-        regexp: "^ansibleSetup"
-        line: "ansibleSetup ALL=(ALL) NOPASSWD: ALL"
+        regexp: "^{{ USERNAME }}"
+        line: "{{ USERNAME }} ALL=(ALL) NOPASSWD: ALL"
         validate: "visudo -cf %s"
 
 - name: Arch Linux Development Environment Setup
   hosts: localhost
-  become_user: ansibleSetup
-  become: yes
   vars:
     failed_packages: []
 
@@ -31,11 +29,15 @@
         state: started
 
   tasks:
+    - name: Who am I?
+      shell: whoami
+
     - name: Update pacman package database and system without confirmation
+      become: true
       pacman:
         update_cache: yes
         upgrade: yes
-
+    
     - name: Install ZSH and Oh My Zsh
       block:
         - name: Install ZSH
@@ -43,13 +45,14 @@
             name: zsh
             state: present
             update_cache: yes
-
+    
         - name: Install Oh My Zsh
           shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
           args:
             creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
-
+    
     - name: Install base-devel, wget, yay, flatpak and nodejs
+      become: true
       pacman:
         name: "{{ item }}"
         state: present
@@ -57,18 +60,36 @@
       loop:
         - base-devel
         - wget
-        - yay
         - flatpak
+        - openssl
+        - fuse-overlayfs
+        - slirp4netns
+        - gnome-keyring
+        - yay
+        - ripgrep
+        - zoxide
+        - bat
+        - thefuck
+        - git
+        - github-cli
+        - ffmpeg
+        - fzf
+        - podman
+        - libreoffice-still
         - nodejs
-
+        # - syncthing
+        # - noto-fonts-emoji
+    
     - name: Update pacman + aur package database and system without confirmation
+      become: true
       pacman:
         update_cache: yes
         upgrade: yes
         executable: yay
         extra_args: --builddir /var/cache/yay
-
+    
     - name: Install packages using yay
+      become: true
       pacman:
         name: "{{ item }}"
         state: present
@@ -76,30 +97,12 @@
         executable: yay
         extra_args: --builddir /var/cache/yay
       loop:
+        - 7-zip-full
         - snapd
-        - ttf-ms-fonts
-        - ibus-bamboo
-        - qdirstat
-        - syncthing
-        - ffmpeg
         - ffprobe
         - exa
-        - zoxide
-        - noto-fonts-emoji
-        - fzf
-        - thefuck
-        - batgit
-        - ripgrep
-        - github-cli
-        - git
-        - 7-zip-full
-        - zip
-        - unzip
-        - openssl
+        - ibus-bamboo
         - yt-dlp
-        - fuse-overlayfs
-        - slirp4netns
-        - gnome-keyring
         - vscodium-bin
         - visual-studio-code-bin
         - fastfetch
@@ -109,22 +112,23 @@
         - nitch
         - cmatrix
         - pipes-rs-git
-        - stremio
-        - ttf-meslo-nerd
+        # - stremio
+        # - ttf-ms-fonts
+        # - ttf-meslo-nerd
         - ttf-firacode-nerd
         - ttf-jetbrains-mono-nerd
-        - ttf-roboto-mono-nerd
-        - ttf-ubuntu-nerd
-        - ttf-ubuntu-mono-nerd
+        # - ttf-roboto-mono-nerd
+        # - ttf-ubuntu-nerd
+        # - ttf-ubuntu-mono-nerd
       register: package_results
       ignore_errors: true
-
+    
     - name: Identify failed packages
       set_fact:
         failed_packages: "{{ failed_packages + [item.item] }}"
       loop: "{{ package_results.results }}"
       when: item.failed
-
+    
     - name: Retry installing failed packages using yay
       yay:
         name: "{{ item }}"
@@ -132,32 +136,31 @@
         update_cache: yes
       loop: "{{ failed_packages }}"
       when: failed_packages | length > 0
-
+    
     - name: Enable snapd and link snap directory
       block:
         - name: Enable snapd.socket using a handler
           command: "true"
           notify: enable snapd.socket
-
+    
         - name: Create symbolic link for snap
           file:
             src: /var/lib/snapd/snap
             dest: /snap
             state: link
             force: yes
-
+    
     - name: Install flatpak applications
       flatpak:
         name: "{{ item }}"
         state: present
       loop:
-        - flathub
         - com.getpostman.Postman
         - com.discordapp.Discord
         - com.brave.Browser
         - org.videolan.VLC
         - com.github.tchx84.Flatseal
-        - com.obsproject.Studio
+        - com.obsproject.Studionvm
         - org.qbittorrent.qBittorrent
         - com.axosoft.GitKraken
         - com.usebottles.bottles
@@ -166,21 +169,29 @@
         # - com.calibre_ebook.calibre
         # - org.musicbrainz.Picard
 
-    - name: Install global npm packages
-      npm:
-        name: pnpm
-        global: yes
-
+    - name: Install nvm
+      ansible.builtin.shell: >
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    
+    - name: Install node and set version
+      shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install node"
+      args:
+        executable: /bin/bash
+    
+    - name: Install pnpm
+      ansible.builtin.shell: >
+        curl -fsSL https://get.pnpm.io/install.sh | sh -
+    
     - name: Install global PNPM package
-      community.general.pnpm:
+      npm:
         name: tldr
         global: yes
 
     - name: Install SDKMan and configure environment
       shell: |
-        curl -s "https://get.sdkman.io" | zsh source "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
-      args:
-        executable: zsh
+        curl -s "https://get.sdkman.io" | bash
 
     - name: Create symlink for VSCode + VSCodium
       block:
@@ -190,12 +201,13 @@
             state: directory
             mode: "0755"
 
-        - name: Create symlinks for VSCode to VSCodium
+        - name: Create symlink from VSCode to VSCodium if source exists
           file:
             src: "{{ item.src }}"
             dest: "{{ item.dest }}"
             state: link
             force: yes
+          when: lookup('fileglob', item.src) != ''
           with_items:
             - {
                 src: "{{ ansible_env.HOME }}/.vscode",
@@ -233,6 +245,7 @@
             dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/plugins/zsh-syntax-highlighting"
 
     - name: Configuring Podman Rootless
+      become: true
       block:
         - name: Enable unprivileged user namespaces
           sysctl:
@@ -272,12 +285,12 @@
       debug:
         msg: "Setup Done!"
 
-- name: Revoke passwordless sudo from ansibleSetup user
+- name: Revoke passwordless sudo from {{ USERNAME }} user
   hosts: localhost
-  become: yes # Back to running as a privileged user to remove the passwordless sudo
+  become: true # Back to running as a privileged user to remove the passwordless sudo
   tasks:
-    - name: Remove ansibleSetup user from sudoers
+    - name: Remove {{ USERNAME }} user from sudoers
       ansible.builtin.lineinfile:
         path: /etc/sudoers
         state: absent
-        regexp: "^ansibleSetup"
+        regexp: "^{{ USERNAME }}"

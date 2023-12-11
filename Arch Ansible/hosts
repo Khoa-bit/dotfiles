@@ -1,2 +1,5 @@
 [local]
-localhost ansible_connection=local ansible_user=ansibleSetup
+localhost ansible_connection=local
+
+[all:vars]
+USERNAME=khoabit
