@@ -4,12 +4,12 @@
   become: true # This playbook needs to be run as a user with sudo privileges
   tasks:
     - name: Ensure {{ USERNAME }} user is present
-      ansible.builtin.user:
+      user:
         name: "{{ USERNAME }}"
         state: present
 
     - name: Allow {{ USERNAME }} user to run sudo without password
-      ansible.builtin.lineinfile:
+      lineinfile:
         path: /etc/sudoers
         state: present
         regexp: "^{{ USERNAME }}"
@@ -29,16 +29,14 @@
         state: started
 
   tasks:
-    - name: Who am I?
-      shell: whoami
-
     - name: Update pacman package database and system without confirmation
       become: true
       pacman:
         update_cache: yes
         upgrade: yes
     
-    - name: Install ZSH and Oh My Zsh
+    - name: Install ZSH
+      become: true
       block:
         - name: Install ZSH
           pacman:
@@ -46,14 +44,14 @@
             state: present
             update_cache: yes
     
-        - name: Install Oh My Zsh
-          shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-          args:
-            creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
-
         - name: Set ZSH as the default shell
           shell: chsh -s $(which zsh)
     
+    - name: Install Oh My Zsh
+      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+      args:
+        creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+
     - name: Install base-devel, wget, yay, flatpak and nodejs
       become: true
       pacman:
@@ -68,6 +66,7 @@
         - fuse-overlayfs
         - slirp4netns
         - gnome-keyring
+        - zip
         - yay
         - ripgrep
         - zoxide
@@ -141,6 +140,7 @@
       when: failed_packages | length > 0
     
     - name: Enable snapd and link snap directory
+      become: true
       block:
         - name: Enable snapd.socket using a handler
           command: "true"
@@ -163,7 +163,7 @@
         - com.brave.Browser
         - org.videolan.VLC
         - com.github.tchx84.Flatseal
-        - com.obsproject.Studionvm
+        - com.obsproject.Studio
         - org.qbittorrent.qBittorrent
         - com.axosoft.GitKraken
         - com.usebottles.bottles
@@ -173,7 +173,7 @@
         # - org.musicbrainz.Picard
 
     - name: Install nvm
-      ansible.builtin.shell: >
+      shell: >
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
@@ -184,13 +184,14 @@
         executable: /bin/bash
     
     - name: Install pnpm
-      ansible.builtin.shell: >
+      shell: >
         curl -fsSL https://get.pnpm.io/install.sh | sh -
-    
-    - name: Install global PNPM package
-      npm:
-        name: tldr
-        global: yes
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/share/pnpm"
+
+    - name: Install global npm package
+      shell:
+        source ~/.nvm/nvm.sh | npm install -g tldr
 
     - name: Install SDKMan and configure environment
       shell: |
@@ -293,7 +294,7 @@
   become: true # Back to running as a privileged user to remove the passwordless sudo
   tasks:
     - name: Remove {{ USERNAME }} user from sudoers
-      ansible.builtin.lineinfile:
+      lineinfile:
         path: /etc/sudoers
         state: absent
         regexp: "^{{ USERNAME }}"
