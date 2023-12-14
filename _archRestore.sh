@@ -9,8 +9,7 @@ NC='\033[0m' # No Color
 set -o errexit -o nounset
 
 keepExistingConfig() {
-    array=( "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.gitconfig" \
-        "$HOME/.condarc" "$HOME/.local" "$HOME/Packages" )
+    array=( "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.gitconfig" "$HOME/.local" )
 
     # iterate over each element in turn
     for item in "${array[@]}"; do
@@ -61,9 +60,6 @@ cp -vrf ./backup/.local/bin $HOME/.local
 
 echo -e "${BLUE}\n<> Extracting .local/bin/share...${NC}"
 cp -vrf ./backup/.local/share $HOME/.local
-
-echo -e "${BLUE}\n<> Extracting Packages...${NC}"
-cp -vrf ./backup/Packages $HOME
 
 echo -e "${YELLOW}\n<> Extracting .fonts is disabled${NC}"
 echo -e "${YELLOW}\n <> Skipped!${NC}"

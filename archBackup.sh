@@ -36,10 +36,6 @@ echo -e "${BLUE}\n <> Backing up .local/share/konsole...${NC}"
 mkdir -vp ./backup/.local/share
 cp -vrf $HOME/.local/share/konsole ./backup/.local/share
 
-echo -e "${BLUE}\n <> Backing up 2 Packages...${NC}"
-mkdir -vp ./backup/Packages/
-cp -vrf $HOME/Packages/HandMade_Notion_Icons ./backup/Packages
-
 echo -e "${BLUE}\n <> Backing up .fonts...${NC}"
 echo -e "${YELLOW}Skipped!${NC}"
 # 7z a ./backup/fonts.7z -w $HOME/.fonts

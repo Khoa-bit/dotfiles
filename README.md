@@ -4,14 +4,16 @@ Personal Linux dotfiles.
 
 ## KDE Arch Linux
 
-### Setup
+### Setup - Arch X11
 
 ```bash
-# Setup for Arch X11
-$ sh ./archSetup X11
+sudo pacman -S ansible
 
-# Setup for Arch Wayland
-$ sh ./archSetup Wayland
+cd arch-ansible
+ansible-playbook playbook.yaml --ask-become-pass -i hosts -v
+
+cd ..
+sh _archRestore
 ```
 
 ### Backup and Sync
@@ -27,23 +29,19 @@ $ sh ./archBackup
 
 ### Manual Instructions
 
-1.  Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc. (Double Check)
-2.  Edit ~/.p10k.zsh to Customize powerlevel10k or "p10k configure" cmd (Double Check)
-3.  Install and Apply Kwin Scripts:
+1.  Install and Apply Kwin Scripts:
 
-    a. Activate Latte Launcher Menu
+    a. Sticky Window Snapping
 
-    b. Force Blur (Unnecessary)
+    b. Latte Window Colors (Unnecessary)
 
-    c. Latte Window Colors (Unnecessary)
+    c. Force Blur (Unnecessary)
 
-    d. Sticky Window Snapping
+2.  Open autostart and Set:
 
-4.  Open autostart and Set:
+    a. !! Buggy 13-12-2023 !! Easystroke (If on KDE X11)
 
-    a. App: Easystroke (If on KDE X11)
-
-5.  Not include any Look and Feel customizations
+3.  Not include any Look and Feel customizations
 
     a. Plasma style: Future-dark
 
@@ -59,7 +57,7 @@ $ sh ./archBackup
 
     f. GitHub repos: WhiteSur-kde, WhiteSur-icon-theme, McMojave-cursors, moe-theme
 
-6.  Configure gestures Touche - Touchegg
+6.  !! Buggy 13-12-2023 !! Configure gestures Touche - Touchegg
 
 7.  If KDE connect is working, allow its service to be trusted.
 
