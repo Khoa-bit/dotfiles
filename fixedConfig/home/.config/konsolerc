@@ -2,7 +2,7 @@
 DefaultProfile=Personal.profile
 
 [Favorite Profiles]
-Favorites=Breath2.profile
+Favorites=Personal.profile
 
 [General]
 ConfigVersion=1
@@ -10,6 +10,7 @@ ConfigVersion=1
 [MainWindow]
 MenuBar=Disabled
 StatusBar=Disabled
+ToolBarsMovable=Disabled
 
 [MainWindow][Toolbar sessionToolbar]
 IconSize=16
