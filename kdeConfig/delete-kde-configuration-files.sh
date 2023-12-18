@@ -2,17 +2,16 @@
 
 # Reference https://github.com/shalva97/kde-configuration-files
 
-set fileList Trolltech.conf akregatorrc baloofilerc bluedevilglobalrc kactivitymanagerd-statsrc
-set -a fileList kactivitymanagerdrc kactivitymanagerd-pluginsrc kateschemarc kcmfonts kcminputrc kconf_updaterc kded5rc
-set -a fileList kdeglobals kfontinstuirc kglobalshortcutsrc khotkeysrc kmixctrlrc kmixrc
-set -a fileList kscreenlockerrc ksmserverrc ksplashrc ktimezonedrc kwinrc kwinrulesrc plasma-localerc
-set -a fileList plasma-nm plasma-org.kde.plasma.desktop-appletsrc plasmarc plasmashellrc
-set -a fileList powermanagementprofilesrc startupconfig startupconfigfiles startupconfigkeys
-set -a fileList krunnerrc touchpadxlibinputrc systemsettingsrc kxkbrc PlasmaUserFeedback
-set -a fileList kde.org/* kiorc klipperrc knfsshare kuriikwsfilterrc kwalletmanager5rc kwalletrc
-set -a fileList plasma.emojierrc plasmanotifyrc PlasmaUserFeedback powerdevilrc kgammarc
-set -a fileList kded_device_automounterrc device_automounter_kcmrc klaunchrc
-set -a fileList trashrc kactivitymanagerd-switcher gtkrc-2.0 gtkrc baloofileinformationrc
-set -a fileList breezerc
-
-rm $fileList
+cd ~/.config
+rm -rf Trolltech.conf akregatorrc baloofilerc bluedevilglobalrc kactivitymanagerd-statsrc
+rm -rf kactivitymanagerdrc kactivitymanagerd-pluginsrc kateschemarc kcmfonts kcminputrc kconf_updaterc kded5rc
+rm -rf kdeglobals kfontinstuirc kglobalshortcutsrc khotkeysrc kmixctrlrc kmixrc
+rm -rf kscreenlockerrc ksmserverrc ksplashrc ktimezonedrc kwinrc kwinrulesrc plasma-localerc
+rm -rf plasma-nm plasma-org.kde.plasma.desktop-appletsrc plasmarc plasmashellrc
+rm -rf powermanagementprofilesrc startupconfig startupconfigfiles startupconfigkeys
+rm -rf krunnerrc touchpadxlibinputrc systemsettingsrc kxkbrc PlasmaUserFeedback
+rm -rf kde.org/* kiorc klipperrc knfsshare kuriikwsfilterrc kwalletmanager5rc kwalletrc
+rm -rf plasma.emojierrc plasmanotifyrc PlasmaUserFeedback powerdevilrc kgammarc
+rm -rf kded_device_automounterrc device_automounter_kcmrc klaunchrc
+rm -rf trashrc kactivitymanagerd-switcher gtkrc-2.0 gtkrc baloofileinformationrc
+rm -rf breezerc
