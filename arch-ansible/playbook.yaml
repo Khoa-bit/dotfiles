@@ -191,7 +191,7 @@
 
     - name: Install global npm package
       shell:
-        source ~/.nvm/nvm.sh | npm install -g tldr
+        source ~/.nvm/nvm.sh && npm install -g tldr
 
     - name: Install SDKMan and configure environment
       shell: |
