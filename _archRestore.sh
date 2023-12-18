@@ -61,6 +61,11 @@ cp -vrf ./backup/.local/bin $HOME/.local
 echo -e "${BLUE}\n<> Extracting .local/bin/share...${NC}"
 cp -vrf ./backup/.local/share $HOME/.local
 
+echo -e "${BLUE}\n<> Extracting .config/...${NC}"
+cp -vrf ./fixedConfig/home/.config/ibus-bamboo $HOME/.config
+cp -vrf ./fixedConfig/home/.config/konsolerc $HOME/.config
+cp -vrf ./fixedConfig/home/.config/krunnerrc $HOME/.config
+
 echo -e "${YELLOW}\n<> Extracting .fonts is disabled${NC}"
 echo -e "${YELLOW}\n <> Skipped!${NC}"
 # 7z x ./backup/fonts.7z -o$HOME
