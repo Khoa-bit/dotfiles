@@ -14,6 +14,9 @@ ansible-playbook playbook.yaml --ask-become-pass -i hosts -v
 
 cd ..
 sh _archRestore
+
+cd kdeConfig
+sh setupKDE.sh
 ```
 
 ### Backup and Sync
