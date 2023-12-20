@@ -8,6 +8,10 @@
 
 # kwinrc
 kwriteconfig5 --file $HOME/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+kwriteconfig5 --file $HOME/.config/kwinrc --group Desktops --key Name_3 "Desktop 4"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Desktops --key Name_4 "Desktop 5"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Desktops --key Number "4"
+kwriteconfig5 --file $HOME/.config/kwinrc --group Desktops --key Rows "2"
 # kwriteconfig5 --file $HOME/.config/kwinrc --group MouseBindings --key CommandAllKey Meta
 # kwriteconfig5 --file $HOME/.config/kwinrc --group MouseBindings --key CommandWindow1 "Activate, raise and pass click"
 # kwriteconfig5 --file $HOME/.config/kwinrc --group MouseBindings --key CommandWindow2 "Activate, raise and pass click"
@@ -52,6 +56,7 @@ kwriteconfig5 --file $HOME/.config/kwinrc --group Windows --key BorderlessMaximi
 # kwriteconfig5 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key ShowToolTips "false"
 # a bit of sugar
 kwriteconfig5 --file $HOME/.config/kwinrc  --group "Plugins"  --key "diminactiveEnabled" "true"
+kwriteconfig5 --file $HOME/.config/kwinrc  --group "Effect-diminactive"  --key "Strength" "10"
 # kwriteconfig5 --file $HOME/.config/kwinrc  --group "Plugins"  --key "fallapartEnabled" "true"
 # kwriteconfig5 --file $HOME/.config/kwinrc  --group "Plugins"  --key "kwin4_effect_dimscreenEnabled" "true"
 
@@ -82,6 +87,10 @@ kwriteconfig5 --file $HOME/.config/krunnerrc --group Plugins --key unitconverter
 kwriteconfig5 --file $HOME/.config/krunnerrc --group Plugins --key webshortcutsEnabled "false"
 kwriteconfig5 --file $HOME/.config/krunnerrc --group Plugins --key windowsEnabled "false"
 
+# KDE Global settings
+kwriteconfig5 --file $HOME/.config/kdeglobals --group KDE --key SingleClick "false"
+
+
 # font
 # kwriteconfig5 --file $HOME/.config/kdeglobals --group General --key XftAntialias "true"
 # kwriteconfig5 --file $HOME/.config/kdeglobals --group General --key XftHintStyle ""
@@ -95,6 +104,9 @@ kwriteconfig5 --file $HOME/.config/krunnerrc --group Plugins --key windowsEnable
 
 # # keybindings
 # ./unbind-all-keyboard-shortcuts.sh
+# ShowDesktopGrid with Meta + Tab
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "kwin" --key "next activity" "none,Meta+Tab,Walk through activities"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "ShowDesktopGrid" "Meta+Tab,Meta+F8,Show Desktop Grid"
 # # klipper - unbind few keys and use alt + v for pop up
 # kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "clipboard_action" "none,Ctrl+Alt+X,Enable Clipboard Actions"
 # kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "repeat_action" "none,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard"
@@ -125,7 +137,7 @@ kwriteconfig5 --file $HOME/.config/krunnerrc --group Plugins --key windowsEnable
 # kwriteconfig5 --file $HOME/.config/kxkbrc  --group "Layout"  --key "Use" "true"
 
 # background services
-kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-appmenu"  --key "autoload" "false"
+# kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-appmenu"  --key "autoload" "false"
 kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-baloosearchmodule"  --key "autoload" "false"
 # kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-bluedevil"  --key "autoload" "true"
 kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-browserintegrationreminder"  --key "autoload" "false"
@@ -148,7 +160,7 @@ kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-khotkeys"  --key "au
 # kwriteconfig5 --file $HOME/.config/kded5rc  --group "Module-touchpad"  --key "autoload" "false"
 
 # disable annoying notification when changing volume
-kwriteconfig5 --file $HOME/.config/plasmarc --group OSD --key Enabled "false"
+# kwriteconfig5 --file $HOME/.config/plasmarc --group OSD --key Enabled "false"
 # kwriteconfig cannot write -1 :( 
 # i found the way, needs an empty space...
 kwriteconfig5 --file $HOME/.config/plasmarc --group PlasmaToolTips --key Delay " -1"
