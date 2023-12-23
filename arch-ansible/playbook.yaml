@@ -172,6 +172,14 @@
       shell: |
         curl -s "https://get.sdkman.io" | bash
 
+    - name: Set fail authenticate attempts to 6
+      become: true
+      lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: "^deny = "
+        line: "deny = 6"
+        state: present
+
     - name: Integrate IBus
       block:
         - name: Ensure IBus environemnt variables
@@ -184,12 +192,29 @@
               GTK_IM_MODULE=ibus
               QT_IM_MODULE=ibus
               XMODIFIERS=@im=ibus
-        - name: Ensure ibus auto-start entry on user-login
-          ansible.builtin.lineinfile:
-            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.desktop"
-            line: "Exec=ibus-daemon -rxRd"
+        - name: Create ibus script
+          blockinfile:
+            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh"
+            block: |
+              # /bin/bash
+              sleep 2
+              ibus-daemon -rxRd
             create: yes
             state: present
+            mode: "0777"
+        - name: Ensure ibus auto-start entry on user-login
+          blockinfile:
+            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh.desktop"
+            block: |
+              [Desktop Entry]
+              Exec=sh /home/khoabit/.config/autostart/ibus.sh
+              Icon=dialog-scripts
+              Name=ibus.sh
+              Type=Application
+              X-KDE-AutostartScript=true
+            create: yes
+            state: present
+            mode: "0777"
 
     - name: Create symlink for VSCode + VSCodium
       block:
