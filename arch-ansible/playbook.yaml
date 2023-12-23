@@ -28,7 +28,7 @@
       args:
         creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
 
-    - name: Install base-devel, wget, yay, flatpak and nodejs
+    - name: Install with pacman
       become: true
       pacman:
         name: "{{ item }}"
@@ -58,6 +58,7 @@
         - libreoffice-still
         - nodejs
         - vlc
+        - speech-dispatcher
         # - syncthing
         # - noto-fonts-emoji
 
@@ -170,6 +171,25 @@
     - name: Install SDKMan and configure environment
       shell: |
         curl -s "https://get.sdkman.io" | bash
+
+    - name: Integrate IBus
+      block:
+        - name: Ensure IBus environemnt variables
+          become: true
+          blockinfile:
+            path: /etc/environment
+            prepend_newline: true
+            block: |
+              # IBus integration
+              GTK_IM_MODULE=ibus
+              QT_IM_MODULE=ibus
+              XMODIFIERS=@im=ibus
+        - name: Ensure ibus auto-start entry on user-login
+          ansible.builtin.lineinfile:
+            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.desktop"
+            line: "Exec=ibus-daemon -rxRd"
+            create: yes
+            state: present
 
     - name: Create symlink for VSCode + VSCodium
       block:

@@ -104,9 +104,28 @@ kwriteconfig5 --file $HOME/.config/kdeglobals --group KDE --key SingleClick "fal
 
 # # keybindings
 # ./unbind-all-keyboard-shortcuts.sh
+
 # ShowDesktopGrid with Meta + Tab
-kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "kwin" --key "next activity" "none,Meta+Tab,Walk through activities"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "kwin"        --key "next activity"   "none,Meta+Tab,Walk through activities"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "kwin"        --key "ShowDesktopGrid" "Meta+Tab,Meta+F8,Show Desktop Grid"
 kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "ShowDesktopGrid" "Meta+Tab,Meta+F8,Show Desktop Grid"
+
+# KDE Screenshot Spectacle
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "ActiveWindowScreenShot"      "Meta+Print,Meta+Print,Capture Active Window"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "CurrentMonitorScreenShot"    "Print,none,Capture Current Monitor"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "FullScreenScreenShot"        ",Shift+Print,Capture Entire Desktop"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "OpenWithoutScreenshot"       "none,none,Launch Spectacle without capturing"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "RectangularRegionScreenShot" "Ctrl+Print,Meta+Shift+Print,Capture Rectangular Region"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "WindowUnderCursorScreenShot" ",Meta+Ctrl+Print,Capture Window Under Cursor"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "_k_friendly_name"            "Spectacle"
+kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "org.kde.spectacle.desktop" --key "_launch"                     ",Print,Launch Spectacle"
+
+kwriteconfig5 --file $HOME/.config/spectaclerc --group "General" --key "autoSaveImage"                 "true"
+kwriteconfig5 --file $HOME/.config/spectaclerc --group "General" --key "clipboardGroup"                "PostScreenshotCopyImage"
+kwriteconfig5 --file $HOME/.config/spectaclerc --group "General" --key "rememberLastRectangularRegion" "Never"
+kwriteconfig5 --file $HOME/.config/spectaclerc --group "General" --key "showMagnifier"                 "true"
+kwriteconfig5 --file $HOME/.config/spectaclerc --group "Save"    --key "saveFilenameFormat"            "%Y-%M/Screenshot_%Y-%M-%DT%H:%m:%S"
+
 # # klipper - unbind few keys and use alt + v for pop up
 # kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "clipboard_action" "none,Ctrl+Alt+X,Enable Clipboard Actions"
 # kwriteconfig5 --file $HOME/.config/kglobalshortcutsrc --group "plasmashell" --key "repeat_action" "none,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard"
@@ -193,7 +212,7 @@ kwriteconfig5 --file $HOME/.config/ksmserverrc --group General --key loginMode "
 # sed -i 's/plugin=org.kde.plasma.folder/plugin=org.kde.desktopcontainment/g' $HOME/.config/plasma-org.kde.plasma.desktop-appletsrc
 
 # disable kwallet
-kwriteconfig5 --file $HOME/.config/kwalletrc --group "Wallet" --key "Enabled" "false"
+# kwriteconfig5 --file $HOME/.config/kwalletrc --group "Wallet" --key "Enabled" "false"
 
 # theme settings - disable title bar for all windows but keep borders
 # kwriteconfig5 --file $HOME/.config/breezerc --group "Common" --key "OutlineCloseButton" "false"
