@@ -8,8 +8,47 @@ $git_branch\
 $git_status\
 $git_state\
 [](fg:cyan bg:bright-black)\
+$aws\
+$buf\
+$c\
+$conda\
+$crystal\
+$dart\
+$docker_context\
+$elixir\
+$elm\
+$fennel\
+$fossil_branch\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$hg_branch\
+$hostname\
+$java\
+$julia\
+$kotlin\
+$lua\
+$memory_usage\
+$meson\
+$nim\
+$nix_shell\
+$nodejs\
+$ocaml\
+$package\
+$perl\
+$php\
+$pijul_channel\
+$python\
+$rlang\
+$ruby\
+$rust\
+$scala\
+$swift\
+$zig\
+[](fg:bright-black bg:purple)\
 $cmd_duration\
-[ ](fg:bright-black)\
+[ ](fg:purple)\
 \n$character"""
 
 [character]
@@ -23,7 +62,7 @@ format = '[ $user ]($style)'
 show_always = true
 
 [directory]
-read_only = "🔒"
+read_only = "󰌾"
 read_only_style = "fg:bright-red bg:blue"
 style = "fg:white bg:blue"
 truncation_length = 10
@@ -58,4 +97,156 @@ format = '[[\($state( $progress_current of $progress_total)\)](fg:bright-white b
 [cmd_duration]
 min_time = 0
 style = "bg:bright-black"
-format = '[[ $duration ](fg:white bg:bright-black)]($style)'
+format = '[[ $duration ](fg:white bg:purple)]($style)'
+
+[aws]
+symbol = "  "
+format = "[ $symbol]($style bg:bright-black)"
+
+[buf]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[c]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[conda]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[crystal]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[dart]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[docker_context]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[elixir]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[elm]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[fennel]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[fossil_branch]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[golang]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[guix_shell]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[haskell]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[haxe]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[hg_branch]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[hostname]
+ssh_symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[java]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[julia]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[kotlin]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[lua]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[memory_usage]
+symbol = "󰍛 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[meson]
+symbol = "󰔷 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[nim]
+symbol = "󰆥 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[nix_shell]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[nodejs]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[ocaml]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[package]
+symbol = "󰏗 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[perl]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[php]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[pijul_channel]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[python]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[rlang]
+symbol = "󰟔 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[ruby]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[rust]
+symbol = "󱘗 "
+format = "[ $symbol]($style bg:bright-black)"
+
+[scala]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[swift]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
+
+[zig]
+symbol = " "
+format = "[ $symbol]($style bg:bright-black)"
