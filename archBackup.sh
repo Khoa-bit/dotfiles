@@ -26,7 +26,11 @@ rm -rfv ./backup
 mkdir -vp ./backup
 
 echo -e "${BLUE}\n <> Backing up .zshrc, .p10k.zsh, .gitconfig...${NC}"
-cp -vf $HOME/.zshrc $HOME/.p10k.zsh $HOME/.gitconfig $HOME/.condarc ./backup
+cp -vf $HOME/.zshrc $HOME/.p10k.zsh $HOME/.gitconfig $HOME/.condarc $HOME/.alacritty.toml $HOME/.tmux.conf ./backup
+
+echo -e "${BLUE}\n <> Backing up .config...${NC}"
+mkdir -vp ./backup/.config
+cp -vf $HOME/.config/starship.toml ./backup/.config
 
 echo -e "${BLUE}\n <> Backing up .local/bin/*.sh...${NC}"
 mkdir -vp ./backup/.local/bin

@@ -1,0 +1,61 @@
+format = """
+[░▒▓](white)\
+$username\
+[](bg:blue fg:white)\
+$directory\
+[](fg:blue bg:cyan)\
+$git_branch\
+$git_status\
+$git_state\
+[](fg:cyan bg:bright-black)\
+$cmd_duration\
+[ ](fg:bright-black)\
+\n$character"""
+
+[character]
+success_symbol = ' [➜](bold green)'
+error_symbol = ' [✗](bold red)'
+
+[username]
+style_user = 'bg:white fg:bright-black'
+style_root = 'bg:white fg:bright-red'
+format = '[ $user ]($style)'
+show_always = true
+
+[directory]
+read_only = "🔒"
+read_only_style = "fg:bright-red bg:blue"
+style = "fg:white bg:blue"
+truncation_length = 10
+before_repo_root_style = "fg:white bg:blue"
+repo_root_style = "fg:white bold bg:blue"
+format = "[ $path ]($style)[$read_only]($read_only_style)"
+repo_root_format = "[  ]($style)[$repo_root]($repo_root_style)[$path ]($style)[$read_only]($read_only_style)"
+
+[git_branch]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol $branch ](fg:black bg:cyan)]($style)'
+
+[git_status]
+style = "bg:cyan"
+conflicted = '=${count} '
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕⇡${ahead_count}⇣${behind_count} '
+untracked = '?${count} '
+stashed = '󰏗${count} '
+modified = '!${count} '
+staged = '+${count} '
+renamed = '»${count} '
+deleted = '✘${count} '
+format = '[[($all_status$ahead_behind)](fg:black bg:cyan)]($style)'
+
+[git_state]
+style = "bg:cyan"       
+format = '[[\($state( $progress_current of $progress_total)\)](fg:bright-white bg:cyan) ]($style)'
+
+[cmd_duration]
+min_time = 0
+style = "bg:bright-black"
+format = '[[ $duration ](fg:white bg:bright-black)]($style)'
