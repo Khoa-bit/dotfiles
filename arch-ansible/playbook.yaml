@@ -47,7 +47,6 @@
         - bluez-utils
         - zip
         - yay
-        - ripgrep
         - zoxide
         - bat
         - thefuck
@@ -57,10 +56,9 @@
         - fzf
         - podman
         - libreoffice-still
-        - nodejs
         - vlc
         - speech-dispatcher
-        # - syncthing
+        - starship
         # - noto-fonts-emoji
 
     - name: Update pacman + aur package database and system without confirmation
@@ -81,21 +79,18 @@
         extra_args: --builddir /var/cache/yay
       loop:
         - 7-zip-full
-        - snapd
-        - ffprobe
-        - insomnium-bin
-        - exa
-        - ibus-bamboo
-        - yt-dlp
-        - vscodium-bin
-        - visual-studio-code-bin
-        - fastfetch
-        - onefetch
-        - cpufetch-git
         - clyrics
-        - nitch
         - cmatrix
+        - cpufetch-git
+        - eza
+        - fastfetch
+        - ffprobe
+        - ibus-bamboo
+        - onefetch
         - pipes-rs-git
+        - snapd
+        - visual-studio-code-bin
+        - vscodium-bin
         # - stremio
         # - ttf-ms-fonts
         # - ttf-meslo-nerd
@@ -189,41 +184,41 @@
         line: "deny = 6"
         state: present
 
-    - name: Integrate IBus
-      block:
-        - name: Ensure IBus environemnt variables
-          become: true
-          blockinfile:
-            path: /etc/environment
-            prepend_newline: true
-            block: |
-              # IBus integration
-              GTK_IM_MODULE=ibus
-              QT_IM_MODULE=ibus
-              XMODIFIERS=@im=ibus
-        - name: Create ibus script
-          blockinfile:
-            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh"
-            block: |
-              # /bin/bash
-              sleep 2
-              ibus-daemon -rxRd
-            create: yes
-            state: present
-            mode: "0777"
-        - name: Ensure ibus auto-start entry on user-login
-          blockinfile:
-            path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh.desktop"
-            block: |
-              [Desktop Entry]
-              Exec=sh /home/khoabit/.config/autostart/ibus.sh
-              Icon=dialog-scripts
-              Name=ibus.sh
-              Type=Application
-              X-KDE-AutostartScript=true
-            create: yes
-            state: present
-            mode: "0777"
+    # - name: Integrate IBus
+    #   block:
+    #     - name: Ensure IBus environemnt variables
+    #       become: true
+    #       blockinfile:
+    #         path: /etc/environment
+    #         prepend_newline: true
+    #         block: |
+    #           # IBus integration
+    #           GTK_IM_MODULE=ibus
+    #           QT_IM_MODULE=ibus
+    #           XMODIFIERS=@im=ibus
+    #     - name: Create ibus script
+    #       blockinfile:
+    #         path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh"
+    #         block: |
+    #           # /bin/bash
+    #           sleep 2
+    #           ibus-daemon -rxRd
+    #         create: yes
+    #         state: present
+    #         mode: "0777"
+    #     - name: Ensure ibus auto-start entry on user-login
+    #       blockinfile:
+    #         path: "{{ ansible_env.HOME }}/.config/autostart/ibus.sh.desktop"
+    #         block: |
+    #           [Desktop Entry]
+    #           Exec=sh /home/khoabit/.config/autostart/ibus.sh
+    #           Icon=dialog-scripts
+    #           Name=ibus.sh
+    #           Type=Application
+    #           X-KDE-AutostartScript=true
+    #         create: yes
+    #         state: present
+    #         mode: "0777"
 
     - name: Create symlink for VSCode + VSCodium
       block:
@@ -260,12 +255,6 @@
 
     - name: Customize Oh-my-zsh
       block:
-        - name: Install powerlevel10k theme for Oh-my-zsh
-          git:
-            repo: "https://github.com/romkatv/powerlevel10k.git"
-            dest: "{{ ansible_env.ZSH_CUSTOM | default(ansible_env.HOME + '/.oh-my-zsh/custom') }}/themes/powerlevel10k"
-            depth: 1
-
         - name: Install zsh-autosuggestions plugin for Oh-my-zsh
           git:
             repo: "https://github.com/zsh-users/zsh-autosuggestions"
