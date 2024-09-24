@@ -75,21 +75,21 @@ ZOXIDE_CMD_OVERRIDE=cd
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   colored-man-pages # e.g. colored git help clone
-    command-not-found
-    copybuffer # <Ctrl + o>
-    copypath # copypath [string]
-    extract # extract <filename>
-    fzf
-    git
-    gitfast
-    safe-paste
-    starship
-    thefuck # <Esc> <Esc>
-    universalarchive # ua [format] [files]
-    urltools # urlencode / urldecode [string]
-    zoxide
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+  command-not-found
+  copybuffer # <Ctrl + o>
+  copypath # copypath [string]
+  extract # extract <filename>
+  fzf
+  git
+  gitfast
+  safe-paste
+  starship
+  thefuck # <Esc> <Esc>
+  universalarchive # ua [format] [files]
+  urltools # urlencode / urldecode [string]
+  zoxide
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
