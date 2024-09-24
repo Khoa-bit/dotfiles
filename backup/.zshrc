@@ -66,7 +66,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Set Zoxide `z` command to a default of `cd` -- https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/zoxide
-ZOXIDE_CMD_OVERRIDE="cd"
+ZOXIDE_CMD_OVERRIDE=cd
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -74,18 +74,22 @@ ZOXIDE_CMD_OVERRIDE="cd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  colored-man-pages
-  command-not-found
-  copybuffer
-  copypath
-  fzf
-  git
-  gitfast
-  thefuck
-  starship
-  zoxide
-  zsh-autosuggestions
-  zsh-syntax-highlighting
+  colored-man-pages # e.g. colored git help clone
+    command-not-found
+    copybuffer # <Ctrl + o>
+    copypath # copypath [string]
+    extract # extract <filename>
+    fzf
+    git
+    gitfast
+    safe-paste
+    starship
+    thefuck # <Esc> <Esc>
+    universalarchive # ua [format] [files]
+    urltools # urlencode / urldecode [string]
+    zoxide
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -125,11 +129,11 @@ alias ls="eza -la --icons --group-directories-first"
 alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias pn=pnpm
 
-# Golang
-export PATH=$PATH:$(go env GOPATH)/bin
+# Snapd
+export PATH=/snap/bin:$PATH
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Golang
+export PATH=$(go env GOPATH)/bin:$PATH
 
 # >>> pnpm >>>
 export PNPM_HOME="/home/$USER/.local/share/pnpm"

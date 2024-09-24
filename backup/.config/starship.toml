@@ -1,83 +1,114 @@
 format = """
-[░▒▓](white)\
 $username\
-[](bg:blue fg:white)\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
 $directory\
-[](fg:blue bg:cyan)\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
 $git_branch\
-$git_status\
+$git_commit\
 $git_state\
-[](fg:cyan bg:bright-black)\
-$aws\
-$buf\
-$c\
-$conda\
-$crystal\
-$dart\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
 $docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
 $elixir\
 $elm\
+$erlang\
 $fennel\
-$fossil_branch\
+$gleam\
 $golang\
 $guix_shell\
 $haskell\
 $haxe\
-$hg_branch\
-$hostname\
+$helm\
 $java\
 $julia\
 $kotlin\
+$gradle\
 $lua\
-$memory_usage\
-$meson\
 $nim\
-$nix_shell\
 $nodejs\
 $ocaml\
-$package\
+$opa\
 $perl\
 $php\
-$pijul_channel\
+$pulumi\
+$purescript\
 $python\
+$quarto\
+$raku\
 $rlang\
+$red\
 $ruby\
 $rust\
 $scala\
+$solidity\
 $swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
 $zig\
-[](fg:bright-black bg:purple)\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
 $cmd_duration\
-[ ](fg:purple)\
-\n$character"""
-
-[character]
-success_symbol = ' [➜](bold green)'
-error_symbol = ' [✗](bold red)'
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""
 
 [username]
-style_user = 'bg:white fg:bright-black'
-style_root = 'bg:white fg:bright-red'
-format = '[ $user ]($style)'
+format = '[($user )]($style)'
 show_always = true
+aliases = { "khoanguyen" = "" }
 
 [directory]
 read_only = "󰌾"
-read_only_style = "fg:bright-red bg:blue"
-style = "fg:white bg:blue"
-truncation_length = 10
-before_repo_root_style = "fg:white bg:blue"
-repo_root_style = "fg:white bold bg:blue"
-format = "[ $path ]($style)[$read_only]($read_only_style)"
-repo_root_format = "[  ]($style)[$repo_root]($repo_root_style)[$path ]($style)[$read_only]($read_only_style)"
+truncation_length = 4
+fish_style_pwd_dir_length = 3
+format = "[$path ]($style)[$read_only]($read_only_style)"
+before_repo_root_style = ""
+repo_root_style = ""
+repo_root_format = "[  ]($style fg:bright-blue)[$repo_root]($style fg:bright-blue bold)[$path ]($style)[$read_only]($read_only_style)"
 
 [git_branch]
 symbol = ""
-style = "bg:cyan"
-format = '[[ $symbol $branch ](fg:black bg:cyan)]($style)'
+format = '[$symbol $branch ]($style)'
 
 [git_status]
-style = "bg:cyan"
 conflicted = '=${count} '
 ahead = '⇡${count} '
 behind = '⇣${count} '
@@ -88,165 +119,8 @@ modified = '!${count} '
 staged = '+${count} '
 renamed = '»${count} '
 deleted = '✘${count} '
-format = '[[($all_status$ahead_behind)](fg:black bg:cyan)]($style)'
-
-[git_state]
-style = "bg:cyan"       
-format = '[[\($state( $progress_current of $progress_total)\)](fg:bright-white bg:cyan) ]($style)'
+format = '[$all_status$ahead_behind]($style)'
 
 [cmd_duration]
 min_time = 0
-style = "bg:bright-black"
-format = '[[ $duration ](fg:white bg:purple)]($style)'
-
-[aws]
-symbol = "  "
-format = "[ $symbol]($style bg:bright-black)"
-
-[buf]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[c]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[conda]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[crystal]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[dart]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[docker_context]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[elixir]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[elm]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[fennel]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[fossil_branch]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[golang]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[guix_shell]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[haskell]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[haxe]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[hg_branch]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[hostname]
-ssh_symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[java]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[julia]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[kotlin]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[lua]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[memory_usage]
-symbol = "󰍛 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[meson]
-symbol = "󰔷 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[nim]
-symbol = "󰆥 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[nix_shell]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[nodejs]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[ocaml]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[package]
-symbol = "󰏗 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[perl]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[php]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[pijul_channel]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[python]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[rlang]
-symbol = "󰟔 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[ruby]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[rust]
-symbol = "󱘗 "
-format = "[ $symbol]($style bg:bright-black)"
-
-[scala]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[swift]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
-
-[zig]
-symbol = " "
-format = "[ $symbol]($style bg:bright-black)"
+format = '[($duration )]($style)'
