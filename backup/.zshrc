@@ -128,6 +128,11 @@ alias dlv="yt-dlp "
 alias ls="eza -la --icons --group-directories-first"
 alias fzfcode="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 alias pn=pnpm
+alias egd="sudo sh -c 'echo 0 > /proc/sys/kernel/yama/ptrace_scope' && sudo cat /proc/sys/kernel/yama/ptrace_scope" # enable GO debug process attachment
+
+# Tmuxifier - https://github.com/jimeh/tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
 
 # Snapd
 export PATH=/snap/bin:$PATH

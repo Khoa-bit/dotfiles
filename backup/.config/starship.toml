@@ -5,7 +5,7 @@ success_symbol = '[>](bold green)'
 error_symbol = '[X](bold red)'
 
 [username]
-aliases = { "khoabit" = "" }
+aliases = { "$USER" = "" }
 
 [directory]
 read_only = "󰌾 "
@@ -27,7 +27,7 @@ modified = '!${count} '
 staged = '+${count} '
 renamed = '»${count} '
 deleted = '✘${count} '
-style = "fg:bright-red"
+style = "fg:purple"
 format = '[$all_status$ahead_behind]($style)'
 
 [cmd_duration]
