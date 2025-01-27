@@ -59,6 +59,8 @@
         - vlc
         - speech-dispatcher
         - starship
+        - 7zip
+        # - perl-image-exiftool
         # - noto-fonts-emoji
 
     - name: Update pacman + aur package database and system without confirmation
@@ -78,7 +80,6 @@
         executable: yay
         extra_args: --builddir /var/cache/yay
       loop:
-        - 7-zip-full
         - clyrics
         - cmatrix
         - cpufetch-git
