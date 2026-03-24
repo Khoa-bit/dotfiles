@@ -3,7 +3,7 @@ oh-my-posh init pwsh --config "$HOME\OneDrive - Eurofins ITWW\Documents\PowerShe
 
 # Zoxide that is installed by binaries from Github
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
-. "$HOME\local\bin\_zoxide.ps1"
+. "$HOME\.local\bin\_zoxide.ps1"
 
 # --------------------------------
 
